@@ -1,18 +1,10 @@
 const { Router } = require("express");
-
 const inventoryRouter = Router();
+const inventoryController = require("../controllers/inventoryController");
 
-inventoryRouter.get("/", (req, res) => {
-  res.send("Loading wares");
-});
-inventoryRouter.get("/weapons", (req, res) => {
-  res.send("Loading armaments");
-});
-inventoryRouter.get("/tomes", (req, res) => {
-  res.send("Loading spells");
-});
-inventoryRouter.get("/potions", (req, res) => {
-  res.send("Loading elixirs");
-});
+inventoryRouter.get("/", inventoryController.displayInventory);
+inventoryRouter.get("/weapons", inventoryController.displayWeapons);
+inventoryRouter.get("/tomes", inventoryController.displayTomes);
+inventoryRouter.get("/potions", inventoryController.displayPotions);
 
 module.exports = inventoryRouter;
