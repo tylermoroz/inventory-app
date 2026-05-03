@@ -1,17 +1,31 @@
+const links = require("../links");
+
 function displayInventory(req, res) {
-  res.send("Loading wares");
+  res.render("inventory", {
+    title: "High Reath Wares",
+    links,
+  });
 }
 
 function displayWeapons(req, res) {
-  res.send("Loading armamanets");
+  res.render("weapons", {
+    title: "Weapons of High Reath Wares",
+    links,
+  });
 }
 
 function displayTomes(req, res) {
-  res.send("Loading spells");
+  res.render("tomes", {
+    title: "Tomes of High Reath Wares",
+    links,
+  });
 }
 
 function displayPotions(req, res) {
-  res.send("Loading elixirs");
+  res.render("potions", {
+    title: "Potions of High Reath Wares",
+    links,
+  });
 }
 
 module.exports = {
