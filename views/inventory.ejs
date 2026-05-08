@@ -4,7 +4,15 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <%- include("./partials/navbar", {links}) %>
+    <%- include("./partials/navbar", {links}) %> <%-
+    include("./partials/addInventory") %>
     <h1><%= title %></h1>
+    <ul>
+      <% wares.forEach((item) => { %>
+      <li>
+        id: <%= item.id %>; type: <%= item.type %>; name: <%= item.name %>;
+      </li>
+      <% }) %>
+    </ul>
   </body>
 </html>
