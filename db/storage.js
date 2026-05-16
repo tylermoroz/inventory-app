@@ -12,6 +12,10 @@ class Wares {
     return this.inventory;
   }
 
+  getItem(id) {
+    return this.inventory.find((item) => item.id === Number(id));
+  }
+
   getItemByType(type) {
     return this.inventory.filter((item) => item.type === type);
   }
@@ -24,6 +28,16 @@ class Wares {
     };
     this.inventory.push(newItem);
     this.id++;
+  }
+
+  updateItem(id, { type, name }) {
+    const item = this.inventory.find((item) => item.id === Number(id));
+    item.type = type;
+    item.name = name;
+  }
+
+  deleteItem(id) {
+    this.inventory = this.inventory.filter((item) => item.id !== Number(id));
   }
 }
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+    <h1><%= title%></h1>
+    <%- include("./partials/errors") %>
+    <form action="/<%= item.id %>/update" method="POST">
+        <% const types = ["weapon", "tome", "potion"]; %>
+        <select name="type" id="type">
+            <% types.forEach((type) => { %>
+                <option value="<%= type %>" <%= item.type === type ? "selected" : "" %>>
+                    <%= type %>
+                </option>
+            <% }) %>
+        </select>
+        <input type="text" name="name" value="<%= item.name %>" required>
+        <button type="submit">Update Item</button>
+    </form>
+    <a href="/">Back to inventory</a>
+</body>
+</html>

@@ -5,12 +5,21 @@
   </head>
   <body>
     <%- include("./partials/navbar", {links}) %> <%-
-    include("./partials/addInventory") %>
+    include("./partials/errors") %> <%- include("./partials/addInventory") %>
     <h1><%= title %></h1>
     <ul>
       <% wares.forEach((item) => { %>
       <li>
         id: <%= item.id %>; type: <%= item.type %>; name: <%= item.name %>;
+        <a href="/<%= item.id %>/update">Update</a>
+        <form action="/<%= item.id %>/delete" method="POST">
+          <button
+            type="submit"
+            onclick="return confirm('Are you sure this item no longer belongs?');"
+          >
+            Delete
+          </button>
+        </form>
       </li>
       <% }) %>
     </ul>
