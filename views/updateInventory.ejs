@@ -8,6 +8,7 @@
     <%- include("./partials/errors") %>
     <form action="/<%= item.id %>/update" method="POST">
         <% const types = ["weapon", "tome", "potion"]; %>
+        <% const affinities = ["kinetic", "magic", "holy"]; %>
         <select name="type" id="type">
             <% types.forEach((type) => { %>
                 <option value="<%= type %>" <%= item.type === type ? "selected" : "" %>>
@@ -16,6 +17,13 @@
             <% }) %>
         </select>
         <input type="text" name="name" value="<%= item.name %>" required>
+        <select name="affinity" id="affinity">
+            <% affinities.forEach((affinity) => { %>
+                <option value="<%= affinity %>" <%= item.affinity === affinity ? "selected" : "" %>>
+                    <%= affinity %>
+                </option>
+            <% }) %>
+        </select>
         <button type="submit">Update Item</button>
     </form>
     <a href="/">Back to inventory</a>

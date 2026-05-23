@@ -13,11 +13,14 @@ const validatePost = [
     .withMessage("Item name must only contain letters.")
     .isLength({ min: 3, max: 50 })
     .withMessage("Item name must be between 3 and 50 characters."),
+  body("affinity")
+    .isIn(["kinetic", "magic", "holy"])
+    .withMessage("Invalid item affinity"),
 ];
 
 function displayInventoryGet(req, res) {
   res.render("inventory", {
-    title: "High Reath Wares",
+    title: "High Wreath Wares",
     links,
     wares: wares.getItems(),
   });
@@ -25,7 +28,7 @@ function displayInventoryGet(req, res) {
 
 function displayWeaponsGet(req, res) {
   res.render("weapons", {
-    title: "Weapons of High Reath Wares",
+    title: "Weapons of High Wreath Wares",
     links,
     wares: wares.getItemByType("weapon"),
   });
@@ -33,7 +36,7 @@ function displayWeaponsGet(req, res) {
 
 function displayTomesGet(req, res) {
   res.render("tomes", {
-    title: "Tomes of High Reath Wares",
+    title: "Tomes of High Wreath Wares",
     links,
     wares: wares.getItemByType("tome"),
   });
@@ -41,7 +44,7 @@ function displayTomesGet(req, res) {
 
 function displayPotionsGet(req, res) {
   res.render("potions", {
-    title: "Potions of High Reath Wares",
+    title: "Potions of High Wreath Wares",
     links,
     wares: wares.getItemByType("potion"),
   });
@@ -51,14 +54,14 @@ function createItemPost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).render("inventory", {
-      title: "High Reath Wares",
+      title: "High Wreath Wares",
       links,
       wares: wares.getItems(),
       errors: errors.array(),
     });
   }
-  const { type, name } = matchedData(req);
-  wares.addItem({ type, name });
+  const { type, name, affinity } = matchedData(req);
+  wares.addItem({ type, name, affinity });
   res.redirect("/");
 }
 
@@ -80,8 +83,8 @@ function inventoryUpdatePost(req, res) {
       errors: errors.array(),
     });
   }
-  const { type, name } = matchedData(req);
-  wares.updateItem(req.params.id, { type, name });
+  const { type, name, affinity } = matchedData(req);
+  wares.updateItem(req.params.id, { type, name, affinity });
   res.redirect("/");
 }
 

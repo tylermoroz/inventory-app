@@ -1,9 +1,9 @@
 class Wares {
   constructor() {
     this.inventory = [
-      { id: 1, type: "weapon", name: "sword" },
-      { id: 2, type: "tome", name: "ward" },
-      { id: 3, type: "potion", name: "heal" },
+      { id: 1, type: "weapon", name: "sword", affinity: "kinetic" },
+      { id: 2, type: "tome", name: "ward", affinity: "magic" },
+      { id: 3, type: "potion", name: "heal", affinity: "holy" },
     ];
     this.id = 4;
   }
@@ -20,20 +20,26 @@ class Wares {
     return this.inventory.filter((item) => item.type === type);
   }
 
-  addItem({ type, name }) {
+  getItemByAffinity(affinity) {
+    return this.inventory.filter((item) => item.affinity === affinity);
+  }
+
+  addItem({ type, name, affinity }) {
     const newItem = {
       id: this.id,
       type,
       name,
+      affinity,
     };
     this.inventory.push(newItem);
     this.id++;
   }
 
-  updateItem(id, { type, name }) {
+  updateItem(id, { type, name, affinity }) {
     const item = this.inventory.find((item) => item.id === Number(id));
     item.type = type;
     item.name = name;
+    item.affinity = affinity;
   }
 
   deleteItem(id) {

@@ -11,6 +11,7 @@
       <% wares.forEach((item) => { %>
       <li>
         id: <%= item.id %>; type: <%= item.type %>; name: <%= item.name %>;
+        affinity: <%= item.affinity %>;
         <a href="/<%= item.id %>/update">Update</a>
         <form action="/<%= item.id %>/delete" method="POST">
           <button
