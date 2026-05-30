@@ -1,10 +1,23 @@
 <nav>
-  <ul>
+  <ul class="nav-list">
     <% for(let i = 0; i < links.length; i++) { %>
-    <li>
+    <li class="nav-item">
       <a href="<%= links[i].href %>">
         <span> <%= links[i].text %> </span>
       </a>
+
+      <% if(links[i].affinity) { %>
+      <ul class="dropdown">
+        <% for(let j = 0; j < links[i].affinity.length; j++) { %>
+        <li class="dropdown-item">
+          <a
+            href="<%= links[i].href %>/<%= links[i].affinity[j].toLowerCase() %>"
+            ><%= links[i].affinity[j] %></a
+          >
+        </li>
+        <% } %>
+      </ul>
+      <% } %>
     </li>
     <% } %>
   </ul>

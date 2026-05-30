@@ -20,8 +20,10 @@ class Wares {
     return this.inventory.filter((item) => item.type === type);
   }
 
-  getItemByAffinity(affinity) {
-    return this.inventory.filter((item) => item.affinity === affinity);
+  getItemByAffinity(type, affinity) {
+    return this.inventory.filter(
+      (item) => item.type === type && item.affinity === affinity
+    );
   }
 
   addItem({ type, name, affinity }) {

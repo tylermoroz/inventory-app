@@ -1,7 +1,6 @@
 const links = require("../links");
 const { body, validationResult, matchedData } = require("express-validator");
 const wares = require("../db/storage");
-const storage = require("../db/storage");
 
 const validatePost = [
   body("type")
@@ -26,6 +25,20 @@ function displayInventoryGet(req, res) {
   });
 }
 
+function createAffinityController(type, view, label) {
+  return function (req, res) {
+    const affinity = req.params.affinity;
+    const displayAffinity =
+      affinity.charAt(0).toUpperCase() + affinity.slice(1);
+    res.render(view, {
+      title: `${displayAffinity} ${label} of High Wreath Wares`,
+      links,
+      affinity,
+      wares: wares.getItemByAffinity(type, affinity),
+    });
+  };
+}
+
 function displayWeaponsGet(req, res) {
   res.render("weapons", {
     title: "Weapons of High Wreath Wares",
@@ -33,6 +46,12 @@ function displayWeaponsGet(req, res) {
     wares: wares.getItemByType("weapon"),
   });
 }
+
+const displayWeaponAffinityGet = createAffinityController(
+  "weapon",
+  "weapons",
+  "Weapons"
+);
 
 function displayTomesGet(req, res) {
   res.render("tomes", {
@@ -42,6 +61,12 @@ function displayTomesGet(req, res) {
   });
 }
 
+const displayTomeAffinityGet = createAffinityController(
+  "tome",
+  "tomes",
+  "Tomes"
+);
+
 function displayPotionsGet(req, res) {
   res.render("potions", {
     title: "Potions of High Wreath Wares",
@@ -49,6 +74,12 @@ function displayPotionsGet(req, res) {
     wares: wares.getItemByType("potion"),
   });
 }
+
+const displayPotionAffinityGet = createAffinityController(
+  "potion",
+  "potions",
+  "Potions"
+);
 
 function createItemPost(req, res) {
   const errors = validationResult(req);
@@ -96,8 +127,11 @@ function deleteItemPost(req, res) {
 module.exports = {
   displayInventoryGet,
   displayWeaponsGet,
+  displayWeaponAffinityGet,
   displayTomesGet,
+  displayTomeAffinityGet,
   displayPotionsGet,
+  displayPotionAffinityGet,
   createItemPost,
   validatePost,
   inventoryUpdateGet,

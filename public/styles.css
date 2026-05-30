@@ -1,3 +1,38 @@
 h1 {
   font-size: 24px;
 }
+
+nav {
+  padding: 1em;
+}
+
+.nav-list {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+}
+
+.nav-list,
+.dropdown {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item .dropdown {
+  display: none;
+  position: absolute;
+}
+
+.nav-item:hover .dropdown {
+  display: block;
+  background-color: white;
+}
+
+.dropdown-item {
+  padding: 0.2em;
+}
