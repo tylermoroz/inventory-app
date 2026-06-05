@@ -4,7 +4,7 @@
     "ejs": "^5.0.1",
     "express": "^5.2.1",
     "express-validator": "^7.3.2",
-    "pg": "^8.20.0",
+    "pg": "^8.21.0",
     "postgres": "^3.4.9"
   },
   "name": "inventory-app",
