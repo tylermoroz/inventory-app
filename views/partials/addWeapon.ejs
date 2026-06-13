@@ -1,0 +1,37 @@
+<form action="/weapons" method="POST">
+  <label for="name">Name: </label>
+  <input type="text" name="name" id="name" required />
+  <label for="weapon-type">Weapon Type: </label>
+  <select name="weapon-type" id="weapon-type">
+    <option value="axe">Axe</option>
+    <option value="sword">Sword</option>
+    <option value="spear">Spear</option>
+    <option value="hammer">Hammer</option>
+    <option value="mace">Mace</option>
+    <option value="dagger">Dagger</option>
+  </select>
+  <label for="affinity-type">Affinity: </label>
+  <select name="affinity-type" id="affinity-type">
+    <option value="holy">Holy</option>
+    <option value="kinetic">Kinetic</option>
+    <option value="magic">Magic</option>
+    <option value="lightning">Lightning</option>
+    <option value="flame">Flame</option>
+  </select>
+  <label for="damage">Damage: </label>
+  <input type="range" name="damage" id="damage" min="1" max="1000" value="1" />
+  <label for="durability">Durability: </label>
+  <input
+    type="range"
+    name="durability"
+    id="durability"
+    min="1"
+    max="100"
+    value="1"
+  />
+  <label for="weight">Weight: </label>
+  <input type="range" name="weight" id="weight" min="1" max="100" value="1" />
+  <label for="value">Value: </label>
+  <input type="number" name="value" id="value" min="1" max="1000" value="1" />
+  <button type="submit">Submit</button>
+</form>

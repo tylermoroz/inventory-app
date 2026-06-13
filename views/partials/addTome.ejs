@@ -1,0 +1,31 @@
+<form action="/tomes" method="POST">
+  <label for="name">Name: </label>
+  <input type="text" name="name" id="name" required />
+  <label for="spell-type">Spell Type: </label>
+  <select name="spell-type" id="spell-type">
+    <option value="destruction">Destruction</option>
+    <option value="blessing">Blessing</option>
+    <option value="curse">Curse</option>
+    <option value="illusion">Illusion</option>
+  </select>
+  <label for="spell-school">Spell School: </label>
+  <select name="spell-school" id="spell-school">
+    <option value="vahseel">Vahseel</option>
+    <option value="nuhlkesh">Nuhlkesh</option>
+    <option value="xiaovet">Xiaovet</option>
+  </select>
+  <label for="mana-cost">Mana Cost: </label>
+  <input
+    type="range"
+    name="mana-cost"
+    id="mana-cost"
+    min="1"
+    max="100"
+    value="1"
+  />
+  <label for="weight">Weight: </label>
+  <input type="range" name="weight" id="weight" min="1" max="100" value="1" />
+  <label for="value">Value: </label>
+  <input type="number" name="value" id="value" min="1" max="1000" value="1" />
+  <button type="submit">Submit</button>
+</form>
