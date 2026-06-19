@@ -8,10 +8,10 @@
     include("./partials/errors") %>
     <h1><%= title %></h1>
     <ul>
-      <% wares.forEach((item) => { %>
+      <% inventory.forEach((item) => { %>
       <li>
-        id: <%= item.id %>; type: <%= item.type %>; name: <%= item.name %>;
-        affinity: <%= item.affinity %>;
+        id: <%= item.id %>; name: <%= item.name %>; type: <%= item.type %>;
+        value: <%= item.value %>; weight: <%= item.weight %>;
         <a href="/<%= item.id %>/update">Update</a>
         <form action="/<%= item.id %>/delete" method="POST">
           <button

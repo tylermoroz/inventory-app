@@ -1,22 +1,22 @@
 <form action="/weapons" method="POST">
   <label for="name">Name: </label>
   <input type="text" name="name" id="name" required />
-  <label for="weapon-type">Weapon Type: </label>
-  <select name="weapon-type" id="weapon-type">
-    <option value="axe">Axe</option>
-    <option value="sword">Sword</option>
-    <option value="spear">Spear</option>
-    <option value="hammer">Hammer</option>
-    <option value="mace">Mace</option>
-    <option value="dagger">Dagger</option>
+  <label for="weapon_type_id">Weapon Type: </label>
+  <select name="weapon_type_id" id="weapon_type_id">
+    <option value="1">Axe</option>
+    <option value="2">Sword</option>
+    <option value="3">Spear</option>
+    <option value="4">Hammer</option>
+    <option value="5">Mace</option>
+    <option value="6">Dagger</option>
   </select>
-  <label for="affinity-type">Affinity: </label>
-  <select name="affinity-type" id="affinity-type">
-    <option value="holy">Holy</option>
-    <option value="kinetic">Kinetic</option>
-    <option value="magic">Magic</option>
-    <option value="lightning">Lightning</option>
-    <option value="flame">Flame</option>
+  <label for="affinity_type_id">Affinity: </label>
+  <select name="affinity_type_id" id="affinity_type_id">
+    <option value="1">Holy</option>
+    <option value="2">Kinetic</option>
+    <option value="3">Magic</option>
+    <option value="4">Lightning</option>
+    <option value="5">Flame</option>
   </select>
   <label for="damage">Damage: </label>
   <input type="range" name="damage" id="damage" min="1" max="1000" value="1" />

@@ -1,6 +1,6 @@
 const links = require("../links");
 const { body, validationResult, matchedData } = require("express-validator");
-const wares = require("../db/storage");
+const db = require("../db/queries");
 
 const validatePost = [
   body("type")
@@ -17,83 +17,61 @@ const validatePost = [
     .withMessage("Invalid item affinity"),
 ];
 
-function displayInventoryGet(req, res) {
+async function getInventory(req, res) {
+  const inventory = await db.getAllInventory();
+  console.log("Inventory: ", inventory);
   res.render("inventory", {
     title: "High Wreath Wares",
     links,
-    wares: wares.getItems(),
+    inventory,
   });
 }
 
-function createAffinityController(type, view, label) {
-  return function (req, res) {
-    const affinity = req.params.affinity;
-    const displayAffinity =
-      affinity.charAt(0).toUpperCase() + affinity.slice(1);
-    res.render(view, {
-      title: `${displayAffinity} ${label} of High Wreath Wares`,
-      links,
-      affinity,
-      wares: wares.getItemByAffinity(type, affinity),
-    });
-  };
-}
-
-function displayWeaponsGet(req, res) {
+async function getWeapons(req, res) {
+  const weapons = await db.getAllWeapons();
+  console.log("Weapons: ", weapons);
   res.render("weapons", {
     title: "Weapons of High Wreath Wares",
     links,
-    wares: wares.getItemByType("weapon"),
+    weapons,
   });
 }
 
-const displayWeaponAffinityGet = createAffinityController(
-  "weapon",
-  "weapons",
-  "Weapons"
-);
-
-function displayTomesGet(req, res) {
+async function getTomes(req, res) {
+  const tomes = await db.getAllTomes();
+  console.log("Tomes: ", tomes);
   res.render("tomes", {
     title: "Tomes of High Wreath Wares",
     links,
-    wares: wares.getItemByType("tome"),
+    tomes,
   });
 }
 
-const displayTomeAffinityGet = createAffinityController(
-  "tome",
-  "tomes",
-  "Tomes"
-);
-
-function displayPotionsGet(req, res) {
+async function getPotions(req, res) {
+  const potions = await db.getAllPotions();
+  console.log("Potions: ", potions);
   res.render("potions", {
     title: "Potions of High Wreath Wares",
     links,
-    wares: wares.getItemByType("potion"),
+    potions,
   });
 }
 
-const displayPotionAffinityGet = createAffinityController(
-  "potion",
-  "potions",
-  "Potions"
-);
-
-function createItemPost(req, res) {
+async function createWeaponPost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render("inventory", {
-      title: "High Wreath Wares",
+    return res.status(400).render("weapons", {
+      title: "Weapons of High Wreath Wares",
       links,
-      wares: wares.getItems(),
+      db: db.getAllWeapons(),
       errors: errors.array(),
     });
   }
-  const { type, name, affinity } = matchedData(req);
-  wares.addItem({ type, name, affinity });
-  res.redirect("/");
+  console.log("BODY:", req.body);
+  console.log("MATCHED:", matchedData(req));
+  const data = matchedData(req);
+  await db.insertWeapon(data);
+  return res.redirect("/");
 }
 
 function inventoryUpdateGet(req, res) {
@@ -125,14 +103,11 @@ function deleteItemPost(req, res) {
 }
 
 module.exports = {
-  displayInventoryGet,
-  displayWeaponsGet,
-  displayWeaponAffinityGet,
-  displayTomesGet,
-  displayTomeAffinityGet,
-  displayPotionsGet,
-  displayPotionAffinityGet,
-  createItemPost,
+  getInventory,
+  getWeapons,
+  getTomes,
+  getPotions,
+  createWeaponPost,
   validatePost,
   inventoryUpdateGet,
   inventoryUpdatePost,

@@ -8,10 +8,11 @@
     include("./partials/addTome") %>
     <h1><%= title %></h1>
     <ul>
-      <% wares.forEach((item) => { %>
+      <% tomes.forEach((item) => { %>
       <li>
-        id: <%= item.id %>; type: <%= item.type %>; name: <%= item.name %>;
-        affinity: <%= item.affinity %>;
+        id: <%= item.shop_inventory_id %>; name: <%= item.name %>; spell type:
+        <%= item.type %>; spell school: <%= item.spell_school_id %>; mana cost:
+        <%= item.mana_cost %>;
         <a href="/<%= item.id %>/update">Update</a>
         <form action="/<%= item.id %>/delete" method="POST">
           <button

@@ -1,28 +1,28 @@
 const { Router } = require("express");
 const inventoryRouter = Router();
 const inventoryController = require("../controllers/inventoryController");
-const { inventory } = require("../db/storage");
 
-inventoryRouter.get("/", inventoryController.displayInventoryGet);
-inventoryRouter.get("/weapons", inventoryController.displayWeaponsGet);
-inventoryRouter.get(
-  "/weapons/:affinity",
-  inventoryController.displayWeaponAffinityGet
-);
-inventoryRouter.get("/tomes", inventoryController.displayTomesGet);
-inventoryRouter.get(
-  "/tomes/:affinity",
-  inventoryController.displayTomeAffinityGet
-);
-inventoryRouter.get("/potions", inventoryController.displayPotionsGet);
-inventoryRouter.get(
-  "/potions/:affinity",
-  inventoryController.displayPotionAffinityGet
-);
+inventoryRouter.get("/", inventoryController.getInventory);
+inventoryRouter.get("/weapons", inventoryController.getWeapons);
+// inventoryRouter.get(
+//   "/weapons/:affinity",
+//   inventoryController.displayWeaponAffinityGet
+// );
+inventoryRouter.post("/weapons", inventoryController.createWeaponPost);
+inventoryRouter.get("/tomes", inventoryController.getTomes);
+// inventoryRouter.get(
+//   "/tomes/:affinity",
+//   inventoryController.displayTomeAffinityGet
+// );
+inventoryRouter.get("/potions", inventoryController.getPotions);
+// inventoryRouter.get(
+//   "/potions/:affinity",
+//   inventoryController.displayPotionAffinityGet
+// );
 inventoryRouter.post(
   "/",
   inventoryController.validatePost,
-  inventoryController.createItemPost
+  inventoryController.createWeaponPost
 );
 inventoryRouter.get("/:id/update", inventoryController.inventoryUpdateGet);
 inventoryRouter.post(

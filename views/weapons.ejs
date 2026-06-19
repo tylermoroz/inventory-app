@@ -8,10 +8,11 @@
     include("./partials/addWeapon") %>
     <h1><%= title %></h1>
     <ul>
-      <% wares.forEach((item) => { %>
+      <% weapons.forEach((item) => { %>
       <li>
-        id: <%= item.id %>; type: <%= item.type %>; name: <%= item.name %>;
-        affinity: <%= item.affinity %>;
+        id: <%= item.shop_inventory_id %>; name: <%= item.name %>; weapon type:
+        <%= item.weapon_type_id %>; damage: <%= item.damage %>; durability: <%=
+        item.durability %>; affinity: <%= item.affinity_type_id %>;
         <a href="/<%= item.id %>/update">Update</a>
         <form action="/<%= item.id %>/delete" method="POST">
           <button

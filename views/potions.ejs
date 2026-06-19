@@ -8,10 +8,11 @@
     include("./partials/addPotion") %>
     <h1><%= title %></h1>
     <ul>
-      <% wares.forEach((item) => { %>
+      <% potions.forEach((item) => { %>
       <li>
-        id: <%= item.id %>; type: <%= item.type %>; name: <%= item.name %>;
-        affinity: <%= item.affinity %>;
+        id: <%= item.shop_inventory_id %>; name: <%= item.name %>; potion type:
+        <%= item.potion_type_id %>; effect: <%= item.effect %>; duration: <%=
+        item.duration %>;
         <a href="/<%= item.id %>/update">Update</a>
         <form action="/<%= item.id %>/delete" method="POST">
           <button
