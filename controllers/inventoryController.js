@@ -2,19 +2,46 @@ const links = require("../links");
 const { body, validationResult, matchedData } = require("express-validator");
 const db = require("../db/queries");
 
-const validatePost = [
-  body("type")
-    .isIn(["weapon", "tome", "potion"])
-    .withMessage("Invalid item type"),
+const validateWeaponPost = [
   body("name")
     .trim()
     .isAlpha()
-    .withMessage("Item name must only contain letters.")
-    .isLength({ min: 3, max: 50 })
-    .withMessage("Item name must be between 3 and 50 characters."),
-  body("affinity")
-    .isIn(["kinetic", "magic", "holy"])
-    .withMessage("Invalid item affinity"),
+    .withMessage("Weapon name must only contain letters.")
+    .isLength({ min: 1, max: 50 })
+    .withMessage("Weapon name must be between 1 and 50 characters."),
+  body("weapon_type_id").notEmpty(),
+  body("aaffinity_type_id").notEmpty(),
+  body("damage").isInt({ min: 1, max: 1000 }),
+  body("durability").isInt({ min: 1, max: 100 }),
+  body("weight").isInt({ min: 1, max: 100 }),
+  body("value").isInt({ min: 1, max: 1000 }),
+];
+
+const validateTomePost = [
+  body("name")
+    .trim()
+    .isAlpha()
+    .withMessage("Tome name must only contain letters.")
+    .isLength({ min: 1, max: 50 })
+    .withMessage("Tome name must be between 1 and 50 characters."),
+  body("spell_type_id").notEmpty(),
+  body("spell_school_id").notEmpty(),
+  body("mana_cost").isInt({ min: 1, max: 100 }),
+  body("weight").isInt({ min: 1, max: 100 }),
+  body("value").isInt({ min: 1, max: 1000 }),
+];
+
+const validatePotionPost = [
+  body("name")
+    .trim()
+    .isAlpha()
+    .withMessage("Potion name must only contain letters.")
+    .isLength({ min: 1, max: 50 })
+    .withMessage("Potion name must be between 1 and 50 characters."),
+  body("potion_type_id").notEmpty(),
+  body("duration").isInt({ min: 1, max: 20 }),
+  body("weight").isInt({ min: 1, max: 100 }),
+  body("value").isInt({ min: 1, max: 1000 }),
 ];
 
 async function getInventory(req, res) {
@@ -71,7 +98,41 @@ async function createWeaponPost(req, res) {
   console.log("MATCHED:", matchedData(req));
   const data = matchedData(req);
   await db.insertWeapon(data);
-  return res.redirect("/");
+  return res.redirect("/weapons");
+}
+
+async function createTomePost(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).render("tomes", {
+      title: "Tomes of High Wreath Wares",
+      links,
+      db: db.getAllTomes(),
+      errors: errors.array(),
+    });
+  }
+  console.log("BODY:", req.body);
+  console.log("MATCHED:", matchedData(req));
+  const data = matchedData(req);
+  await db.insertTome(data);
+  return res.redirect("/tomes");
+}
+
+async function createPotionPost(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).render("potions", {
+      title: "Potions of High Wreath Wares",
+      links,
+      db: db.getAllPotions(),
+      errors: errors.array(),
+    });
+  }
+  console.log("BODY:", req.body);
+  console.log("MATCHED:", matchedData(req));
+  const data = matchedData(req);
+  await db.insertPotion(data);
+  return res.redirect("/potions");
 }
 
 function inventoryUpdateGet(req, res) {
@@ -108,7 +169,11 @@ module.exports = {
   getTomes,
   getPotions,
   createWeaponPost,
-  validatePost,
+  createTomePost,
+  createPotionPost,
+  validateWeaponPost,
+  validateTomePost,
+  validatePotionPost,
   inventoryUpdateGet,
   inventoryUpdatePost,
   deleteItemPost,

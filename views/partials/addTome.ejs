@@ -1,24 +1,24 @@
 <form action="/tomes" method="POST">
   <label for="name">Name: </label>
   <input type="text" name="name" id="name" required />
-  <label for="spell-type">Spell Type: </label>
-  <select name="spell-type" id="spell-type">
-    <option value="destruction">Destruction</option>
-    <option value="blessing">Blessing</option>
-    <option value="curse">Curse</option>
-    <option value="illusion">Illusion</option>
+  <label for="spell_type_id">Spell Type: </label>
+  <select name="spell_type_id" id="spell_type_id">
+    <option value="1">Destruction</option>
+    <option value="2">Blessing</option>
+    <option value="3">Curse</option>
+    <option value="4">Illusion</option>
   </select>
-  <label for="spell-school">Spell School: </label>
-  <select name="spell-school" id="spell-school">
-    <option value="vahseel">Vahseel</option>
-    <option value="nuhlkesh">Nuhlkesh</option>
-    <option value="xiaovet">Xiaovet</option>
+  <label for="spell_school_id">Spell School: </label>
+  <select name="spell_school_id" id="spell_school_id">
+    <option value="1">Vahseel</option>
+    <option value="2">Nuhlkesh</option>
+    <option value="3">Xiaovet</option>
   </select>
-  <label for="mana-cost">Mana Cost: </label>
+  <label for="mana_cost">Mana Cost: </label>
   <input
     type="range"
-    name="mana-cost"
-    id="mana-cost"
+    name="mana_cost"
+    id="mana_cost"
     min="1"
     max="100"
     value="1"
