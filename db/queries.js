@@ -61,7 +61,8 @@ async function insertInventoryBase(name, type, value, weight) {
       value, 
       weight
      ) 
-     VALUES ($1, $2, $3, $4)`,
+     VALUES ($1, $2, $3, $4)
+     RETURNING id`,
     [name, type, value, weight]
   );
 
@@ -135,6 +136,31 @@ async function insertPotion(data) {
   );
 }
 
+async function getWeaponTypes() {
+  const { rows } = await pool.query(`SELECT id, name FROM weapon_type`);
+  return rows;
+}
+
+async function getAffinityTypes() {
+  const { rows } = await pool.query(`SELECT id, name FROM affinity_type`);
+  return rows;
+}
+
+async function getSpellTypes() {
+  const { rows } = await pool.query(`SELECT id, name FROM spell_type`);
+  return rows;
+}
+
+async function getSpellSchools() {
+  const { rows } = await pool.query(`SELECT id, name FROM spell_school`);
+  return rows;
+}
+
+async function getPotionTypes() {
+  const { rows } = await pool.query(`SELECT id, name FROM potion_type`);
+  return rows;
+}
+
 module.exports = {
   getAllInventory,
   getAllWeapons,
@@ -144,4 +170,9 @@ module.exports = {
   insertWeapon,
   insertTome,
   insertPotion,
+  getWeaponTypes,
+  getAffinityTypes,
+  getSpellTypes,
+  getSpellSchools,
+  getPotionTypes,
 };

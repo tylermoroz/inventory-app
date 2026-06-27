@@ -5,19 +5,20 @@
   </head>
   <body>
     <%- include("./partials/navbar", {links}) %> <%-
-    include("./partials/addWeapon") %>
+    include("./partials/addWeapon", {weaponTypes, affinityTypes}) %>
     <h1><%= title %></h1>
     <ul>
-      <% weapons.forEach((item) => { %>
+      <% weapons.forEach((weapon) => { %>
       <li>
-        id: <%= item.shop_inventory_id %>; name: <%= item.name %>; weapon type:
-        <%= item.weapon_type_id %>; damage: <%= item.damage %>; durability: <%=
-        item.durability %>; affinity: <%= item.affinity_type_id %>;
-        <a href="/<%= item.id %>/update">Update</a>
-        <form action="/<%= item.id %>/delete" method="POST">
+        id: <%= weapon.shop_inventory_id %>; name: <%= weapon.name %>; weapon
+        type: <%= weapon.weapon_type_id %>; damage: <%= weapon.damage %>;
+        durability: <%= weapon.durability %>; affinity: <%=
+        weapon.affinity_type_id %>;
+        <a href="/<%= weapon.id %>/update">Update</a>
+        <form action="/<%= weapon.id %>/delete" method="POST">
           <button
             type="submit"
-            onclick="return confirm('Are you sure this item no longer belongs?');"
+            onclick="return confirm('Are you sure this weapon no longer belongs?');"
           >
             Delete
           </button>
