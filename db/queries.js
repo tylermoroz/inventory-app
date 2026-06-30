@@ -127,12 +127,11 @@ async function insertPotion(data) {
   await pool.query(
     `INSERT INTO potions (
       shop_inventory_id,
-      effect,
-      duration,
+      duration_seconds,
       potion_type_id
      )
-     VALUES ($1, $2, $3, $4)`,
-    [inventoryId, data.effect, data.duration, data.potion_type_id]
+     VALUES ($1, $2, $3)`,
+    [inventoryId, data.duration_seconds, data.potion_type_id]
   );
 }
 

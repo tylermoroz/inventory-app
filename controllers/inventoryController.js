@@ -39,7 +39,7 @@ const validatePotionPost = [
     .isLength({ min: 1, max: 50 })
     .withMessage("Potion name must be between 1 and 50 characters."),
   body("potion_type_id").notEmpty(),
-  body("duration").isInt({ min: 1, max: 20 }),
+  body("duration_seconds").isInt({ min: 1, max: 20 }),
   body("weight").isInt({ min: 1, max: 100 }),
   body("value").isInt({ min: 1, max: 1000 }),
 ];
@@ -101,7 +101,6 @@ async function getPotions(req, res) {
 }
 
 async function createWeaponPost(req, res) {
-  console.log("POST /weapons hit");
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log("ERRORS: ", errors);

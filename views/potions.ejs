@@ -5,19 +5,19 @@
   </head>
   <body>
     <%- include("./partials/navbar", {links}) %> <%-
-    include("./partials/addPotion") %>
+    include("./partials/addPotion", {potionTypes}) %>
     <h1><%= title %></h1>
     <ul>
-      <% potions.forEach((item) => { %>
+      <% potions.forEach((potion) => { %>
       <li>
-        id: <%= item.shop_inventory_id %>; name: <%= item.name %>; potion type:
-        <%= item.potion_type_id %>; effect: <%= item.effect %>; duration: <%=
-        item.duration %>;
-        <a href="/<%= item.id %>/update">Update</a>
-        <form action="/<%= item.id %>/delete" method="POST">
+        id: <%= potion.shop_inventory_id %>; name: <%= potion.name %>; potion
+        type: <%= potion.potion_type_id %>; duration(seconds): <%=
+        potion.duration_seconds %>;
+        <a href="/<%= potion.id %>/update">Update</a>
+        <form action="/<%= potion.id %>/delete" method="POST">
           <button
             type="submit"
-            onclick="return confirm('Are you sure this item no longer belongs?');"
+            onclick="return confirm('Are you sure this potion no longer belongs?');"
           >
             Delete
           </button>

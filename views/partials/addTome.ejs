@@ -3,16 +3,15 @@
   <input type="text" name="name" id="name" required />
   <label for="spell_type_id">Spell Type: </label>
   <select name="spell_type_id" id="spell_type_id">
-    <option value="1">Destruction</option>
-    <option value="2">Blessing</option>
-    <option value="3">Curse</option>
-    <option value="4">Illusion</option>
+    <% spellTypes.forEach(spell => { %>
+    <option value="<%= spell.id %>"><%= spell.name %></option>
+    <% }) %>
   </select>
   <label for="spell_school_id">Spell School: </label>
   <select name="spell_school_id" id="spell_school_id">
-    <option value="1">Vahseel</option>
-    <option value="2">Nuhlkesh</option>
-    <option value="3">Xiaovet</option>
+    <% spellSchools.forEach(school => { %>
+    <option value="<%= school.id %>"><%= school.name %></option>
+    <% }) %>
   </select>
   <label for="mana_cost">Mana Cost: </label>
   <input

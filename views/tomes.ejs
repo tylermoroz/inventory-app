@@ -5,19 +5,19 @@
   </head>
   <body>
     <%- include("./partials/navbar", {links}) %> <%-
-    include("./partials/addTome") %>
+    include("./partials/addTome", {spellTypes, spellSchools}) %>
     <h1><%= title %></h1>
     <ul>
-      <% tomes.forEach((item) => { %>
+      <% tomes.forEach((tome) => { %>
       <li>
-        id: <%= item.shop_inventory_id %>; name: <%= item.name %>; spell type:
-        <%= item.type %>; spell school: <%= item.spell_school_id %>; mana cost:
-        <%= item.mana_cost %>;
-        <a href="/<%= item.id %>/update">Update</a>
-        <form action="/<%= item.id %>/delete" method="POST">
+        id: <%= tome.shop_inventory_id %>; name: <%= tome.name %>; spell type:
+        <%= tome.spell_type_id %>; spell school: <%= tome.spell_school_id %>;
+        mana cost: <%= tome.mana_cost %>;
+        <a href="/<%= tome.id %>/update">Update</a>
+        <form action="/<%= tome.id %>/delete" method="POST">
           <button
             type="submit"
-            onclick="return confirm('Are you sure this item no longer belongs?');"
+            onclick="return confirm('Are you sure this tome no longer belongs?');"
           >
             Delete
           </button>
