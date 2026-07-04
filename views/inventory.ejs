@@ -4,14 +4,14 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <%- include("./partials/navbar", {links}) %> <%-
+    <%- include("./partials/navbar", {itemTypes}) %> <%-
     include("./partials/errors") %>
     <h1><%= title %></h1>
     <ul>
       <% inventory.forEach((item) => { %>
       <li>
-        id: <%= item.id %>; name: <%= item.name %>; type: <%= item.type %>;
-        value: <%= item.value %>; weight: <%= item.weight %>;
+        id: <%= item.id %>; name: <%= item.name %>; type: <%= item.item_type_id
+        %>; value: <%= item.value %>; weight: <%= item.weight %>;
         <a href="/<%= item.id %>/update">Update</a>
         <form action="/<%= item.id %>/delete" method="POST">
           <button

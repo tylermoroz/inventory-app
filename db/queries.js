@@ -10,7 +10,7 @@ async function getAllWeapons() {
     `SELECT 
       weapons.*, 
       shop_inventory.name, 
-      shop_inventory.type, 
+      shop_inventory.item_type_id, 
       shop_inventory.value, 
       shop_inventory.weight
      FROM weapons
@@ -26,7 +26,7 @@ async function getAllTomes() {
     `SELECT 
       tomes.*, 
       shop_inventory.name, 
-      shop_inventory.type, 
+      shop_inventory.item_type_id, 
       shop_inventory.value, 
       shop_inventory.weight
      FROM tomes
@@ -42,7 +42,7 @@ async function getAllPotions() {
     `SELECT 
       potions.*, 
       shop_inventory.name, 
-      shop_inventory.type, 
+      shop_inventory.item_type_id, 
       shop_inventory.value, 
       shop_inventory.weight
      FROM potions
@@ -53,17 +53,17 @@ async function getAllPotions() {
   return rows;
 }
 
-async function insertInventoryBase(name, type, value, weight) {
+async function insertInventoryBase(name, itemTypeId, value, weight) {
   const result = await pool.query(
     `INSERT INTO shop_inventory (
       name, 
-      type, 
+      item_type_id, 
       value, 
       weight
      ) 
      VALUES ($1, $2, $3, $4)
      RETURNING id`,
-    [name, type, value, weight]
+    [name, itemTypeId, value, weight]
   );
 
   return result.rows[0].id;
@@ -72,7 +72,7 @@ async function insertInventoryBase(name, type, value, weight) {
 async function insertWeapon(data) {
   const inventoryId = await insertInventoryBase(
     data.name,
-    "weapon",
+    1,
     data.value,
     data.weight
   );
@@ -99,7 +99,7 @@ async function insertWeapon(data) {
 async function insertTome(data) {
   const inventoryId = await insertInventoryBase(
     data.name,
-    "tome",
+    2,
     data.value,
     data.weight
   );
@@ -119,7 +119,7 @@ async function insertTome(data) {
 async function insertPotion(data) {
   const inventoryId = await insertInventoryBase(
     data.name,
-    "potion",
+    3,
     data.value,
     data.weight
   );
@@ -160,6 +160,11 @@ async function getPotionTypes() {
   return rows;
 }
 
+async function getItemTypes() {
+  const { rows } = await pool.query(`SELECT name FROM item_type;`);
+  return rows;
+}
+
 module.exports = {
   getAllInventory,
   getAllWeapons,
@@ -174,4 +179,5 @@ module.exports = {
   getSpellTypes,
   getSpellSchools,
   getPotionTypes,
+  getItemTypes,
 };
