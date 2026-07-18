@@ -180,11 +180,20 @@ async function createPotionPost(req, res) {
   return res.redirect("/potions");
 }
 
-function inventoryUpdateGet(req, res) {
-  const item = wares.getItem(req.params.id);
-  res.render("updateInventory", {
-    title: "Update Inventory",
-    item: item,
+async function weaponUpdateGet(req, res) {
+  const [weapon, weaponTypes, affinityTypes] = await Promise.all([
+    db.getWeapon(req.params.id),
+    db.getWeaponTypes(),
+    db.getAffinityTypes(),
+  ]);
+
+  console.log("WEAPON: ", weapon);
+
+  res.render("updateWeapon", {
+    title: "Update Weapon",
+    weapon,
+    weaponTypes,
+    affinityTypes,
   });
 }
 
@@ -219,7 +228,7 @@ module.exports = {
   validateWeaponPost,
   validateTomePost,
   validatePotionPost,
-  inventoryUpdateGet,
+  weaponUpdateGet,
   inventoryUpdatePost,
   deleteItemPost,
 };

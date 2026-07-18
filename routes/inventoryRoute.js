@@ -25,12 +25,12 @@ inventoryRouter.post(
   inventoryController.createPotionPost
 );
 
-inventoryRouter.get("/:id/update", inventoryController.inventoryUpdateGet);
+inventoryRouter.get("/weapons/:id/update", inventoryController.weaponUpdateGet);
 // inventoryRouter.post(
 //   "/:id/update",
 //   inventoryController.validatePost,
 //   inventoryController.inventoryUpdatePost
 // );
-inventoryRouter.post("/:id/delete", inventoryController.deleteItemPost);
+// inventoryRouter.post("/:id/delete", inventoryController.deleteItemPost);
 
 module.exports = inventoryRouter;

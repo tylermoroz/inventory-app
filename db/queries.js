@@ -165,6 +165,23 @@ async function getItemTypes() {
   return rows;
 }
 
+async function getWeapon(id) {
+  const { rows } = await pool.query(
+    `SELECT weapons.*, 
+      shop_inventory.id,
+      shop_inventory.name, 
+      shop_inventory.item_type_id, 
+      shop_inventory.value, 
+      shop_inventory.weight
+     FROM shop_inventory
+     JOIN weapons 
+      ON weapons.shop_inventory_id = shop_inventory.id 
+     WHERE shop_inventory.id = $1`,
+    [id]
+  );
+  return rows[0];
+}
+
 module.exports = {
   getAllInventory,
   getAllWeapons,
@@ -180,4 +197,5 @@ module.exports = {
   getSpellSchools,
   getPotionTypes,
   getItemTypes,
+  getWeapon,
 };
