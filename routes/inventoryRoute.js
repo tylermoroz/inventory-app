@@ -26,6 +26,9 @@ inventoryRouter.post(
 );
 
 inventoryRouter.get("/weapons/:id/update", inventoryController.weaponUpdateGet);
+inventoryRouter.get("/tomes/:id/update", inventoryController.tomeUpdateGet);
+inventoryRouter.get("/potions/:id/update", inventoryController.potionUpdateGet);
+
 // inventoryRouter.post(
 //   "/:id/update",
 //   inventoryController.validatePost,

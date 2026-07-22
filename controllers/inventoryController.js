@@ -187,13 +187,39 @@ async function weaponUpdateGet(req, res) {
     db.getAffinityTypes(),
   ]);
 
-  console.log("WEAPON: ", weapon);
-
   res.render("updateWeapon", {
     title: "Update Weapon",
     weapon,
     weaponTypes,
     affinityTypes,
+  });
+}
+
+async function tomeUpdateGet(req, res) {
+  const [tome, spellTypes, spellSchools] = await Promise.all([
+    db.getTome(req.params.id),
+    db.getSpellTypes(),
+    db.getSpellSchools(),
+  ]);
+
+  res.render("updateTome", {
+    title: "Update Tome",
+    tome,
+    spellTypes,
+    spellSchools,
+  });
+}
+
+async function potionUpdateGet(req, res) {
+  const [potion, potionTypes] = await Promise.all([
+    db.getPotion(req.params.id),
+    db.getPotionTypes(),
+  ]);
+
+  res.render("updatePotion", {
+    title: "Update Potion",
+    potion,
+    potionTypes,
   });
 }
 
@@ -229,6 +255,8 @@ module.exports = {
   validateTomePost,
   validatePotionPost,
   weaponUpdateGet,
+  tomeUpdateGet,
+  potionUpdateGet,
   inventoryUpdatePost,
   deleteItemPost,
 };

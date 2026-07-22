@@ -10,40 +10,40 @@
         <label for="name">Name: </label>
         <input type="text" name="name" id="name" value="<%= weapon.name %>">
         <label for="weapon_type_id">Weapon Type: </label>
-      <select name="weapon_type_id" id="weapon_type_id">
-        <% weaponTypes.forEach((type) => { %>
-        <option value="<%= type.id %>" <%= type.id === weapon.weapon_type_id ? "selected" : "" %>
-        >
-        <%= type.name %>
-        </option>
-        <% }) %>
-      </select>
-      <label for="affinity_type_id">Affinity: </label>
-      <select name="affinity_type_id" id="affinity_type_id">
-        <% affinityTypes.forEach((affinity) => { %>
-        <option value="<%= affinity.id %>" <%= affinity.id === weapon.affinity_type_id ? "selected" : "" %>
-        >
-        <%= affinity.name %>
-        </option>
-        <% }) %>
-      </select>
-      <label for="damage">Damage: </label>
-      <input type="range" name="damage" id="damage" min="1" max="1000" value="<%= weapon.damage %>" />
-      <label for="durability">Durability: </label>
-    <input
-        type="range"
-        name="durability"
-        id="durability"
-        min="1"
-        max="100"
-        value="<%= weapon.durability %>"
-    />
-  <label for="weight">Weight: </label>
-  <input type="range" name="weight" id="weight" min="1" max="100" value="<%= weapon.weight %>" />
-  <label for="value">Value: </label>
-  <input type="number" name="value" id="value" min="1" max="1000" value="<%= weapon.value %>" />
-      <button type="submit">Update Item</button>
+        <select name="weapon_type_id" id="weapon_type_id">
+            <% weaponTypes.forEach((type) => { %>
+            <option value="<%= type.id %>" <%= type.id === weapon.weapon_type_id ? "selected" : "" %>
+            >
+            <%= type.name %>
+            </option>
+            <% }) %>
+        </select>
+        <label for="affinity_type_id">Affinity: </label>
+        <select name="affinity_type_id" id="affinity_type_id">
+            <% affinityTypes.forEach((affinity) => { %>
+            <option value="<%= affinity.id %>" <%= affinity.id === weapon.affinity_type_id ? "selected" : "" %>
+            >
+            <%= affinity.name %>
+            </option>
+            <% }) %>
+        </select>
+        <label for="damage">Damage: </label>
+        <input type="range" name="damage" id="damage" min="1" max="1000" value="<%= weapon.damage %>" />
+        <label for="durability">Durability: </label>
+        <input
+            type="range"
+            name="durability"
+            id="durability"
+            min="1"
+            max="100"
+            value="<%= weapon.durability %>"
+        />
+        <label for="weight">Weight: </label>
+        <input type="range" name="weight" id="weight" min="1" max="100" value="<%= weapon.weight %>" />
+        <label for="value">Value: </label>
+        <input type="number" name="value" id="value" min="1" max="1000" value="<%= weapon.value %>" />
+      <button type="submit">Update Weapon</button>
     </form>
-    <a href="/">Back to inventory</a>
+    <a href="/weapons">Back to Weapons</a>
   </body>
 </html>

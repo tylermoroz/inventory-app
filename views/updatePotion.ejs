@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <form action="/potions/<%= potion.id %>/update" method="POST">
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name" value="<%= potion.name %>">
+        <label for="potion_type_id">Potion Type: </label>
+        <select name="potion_type_id" id="potion_type_id">
+            <% potionTypes.forEach((type) => { %>
+            <option value="<%= type.id %>" <%= type.id === potion.potion_type_id ? "selected" : "" %>
+            >
+            <%= type.name %>
+            </option>
+            <% }) %>
+        </select>
+        <label for="duration_seconds">Duration(seconds): </label>
+        <input type="range" name="duration_seconds" id="duration_seconds" min="1" max="20" value="<%= potion.duration_seconds %>" />
+        <label for="weight">Weight: </label>
+        <input type="range" name="weight" id="weight" min="1" max="100" value="<%= potion.weight %>" />
+        <label for="value">Value: </label>
+        <input type="number" name="value" id="value" min="1" max="1000" value="<%= potion.value %>" />
+      <button type="submit">Update Potion</button>
+    </form>
+    <a href="/potions">Back to Potions</a>
+</body>
+</html>

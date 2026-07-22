@@ -182,6 +182,40 @@ async function getWeapon(id) {
   return rows[0];
 }
 
+async function getTome(id) {
+  const { rows } = await pool.query(
+    `SELECT tomes.*,
+      shop_inventory.id,
+      shop_inventory.name,
+      shop_inventory.item_type_id,
+      shop_inventory.value,
+      shop_inventory.weight
+     FROM shop_inventory
+     JOIN tomes
+      ON tomes.shop_inventory_id = shop_inventory.id
+     WHERE shop_inventory.id = $1`,
+    [id]
+  );
+  return rows[0];
+}
+
+async function getPotion(id) {
+  const { rows } = await pool.query(
+    `SELECT potions.*,
+      shop_inventory.id,
+      shop_inventory.name,
+      shop_inventory.item_type_id,
+      shop_inventory.value,
+      shop_inventory.weight
+     FROM shop_inventory
+     JOIN potions
+      ON potions.shop_inventory_id = shop_inventory.id
+     WHERE shop_inventory.id = $1`,
+    [id]
+  );
+  return rows[0];
+}
+
 module.exports = {
   getAllInventory,
   getAllWeapons,
@@ -198,4 +232,6 @@ module.exports = {
   getPotionTypes,
   getItemTypes,
   getWeapon,
+  getTome,
+  getPotion,
 };

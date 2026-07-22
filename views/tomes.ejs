@@ -13,7 +13,7 @@
         id: <%= tome.shop_inventory_id %>; name: <%= tome.name %>; spell type:
         <%= tome.spell_type_id %>; spell school: <%= tome.spell_school_id %>;
         mana cost: <%= tome.mana_cost %>;
-        <a href="/<%= tome.id %>/update">Update</a>
+        <a href="/tomes/<%= tome.shop_inventory_id %>/update">Update</a>
         <form action="/<%= tome.id %>/delete" method="POST">
           <button
             type="submit"

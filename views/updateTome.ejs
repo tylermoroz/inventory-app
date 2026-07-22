@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <%- include("./partials/errors") %>
+    <form action="/tomes/<%= tome.id %>/update" method="POST">
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name" value="<%= tome.name %>">
+        <label for="spell_type_id">Spell Type: </label>
+        <select name="spell_type_id" id="spell_type_id">
+            <% spellTypes.forEach((type) => { %>
+            <option value="<%= type.id %>" <%= type.id === tome.spell_type_id ? "selected" : "" %>
+            >
+            <%= type.name %>
+            </option>
+            <% }) %>
+        </select>
+        <label for="spell_school_id">Spell School: </label>
+        <select name="spell_school_id" id="spell_school_id">
+            <% spellSchools.forEach((school) => { %>
+            <option value="<%= school.id %>" <%= school.id === tome.spell_school_id ? "selected" : "" %>
+            >
+            <%= school.name %>
+            </option>
+            <% }) %>
+        </select>
+        <label for="mana_cost">Mana Cost: </label>
+        <input type="range" name="mana_cost" id="mana_cost" min="1" max="100" value="<%= tome.mana_cost %>" />
+        <label for="weight">Weight: </label>
+        <input type="range" name="weight" id="weight" min="1" max="100" value="<%= tome.weight %>" />
+        <label for="value">Value: </label>
+        <input type="number" name="value" id="value" min="1" max="1000" value="<%= tome.value %>" />
+      <button type="submit">Update Tome</button>
+    </form>
+    <a href="/tomes">Back to Tomes</a>
+</body>
+</html>
