@@ -161,7 +161,7 @@ async function getPotionTypes() {
 }
 
 async function getItemTypes() {
-  const { rows } = await pool.query(`SELECT name FROM item_type;`);
+  const { rows } = await pool.query(`SELECT id, name FROM item_type;`);
   return rows;
 }
 
@@ -216,6 +216,78 @@ async function getPotion(id) {
   return rows[0];
 }
 
+async function updateInventoryBase(id, name, value, weight) {
+  await pool.query(
+    `UPDATE shop_inventory
+     SET
+      name = $1,
+      value = $2,
+      weight = $3
+     WHERE id = $4
+    `,
+    [name, value, weight, id]
+  );
+}
+
+async function updateWeapon(id, data) {
+  await updateInventoryBase(id, data.name, data.value, data.weight);
+
+  await pool.query(
+    `UPDATE weapons
+     SET
+      damage = $1,
+      weapon_type_id = $2,
+      durability = $3,
+      affinity_type_id = $4
+     WHERE shop_inventory_id = $5
+    `,
+    [
+      data.damage,
+      data.weapon_type_id,
+      data.durability,
+      data.affinity_type_id,
+      id,
+    ]
+  );
+}
+
+async function updateTome(id, data) {
+  await updateInventoryBase(id, data.name, data.value, data.weight);
+
+  await pool.query(
+    `UPDATE tomes
+     SET
+      spell_type_id = $1,
+      spell_school_id = $2,
+      mana_cost = $3
+     WHERE shop_inventory_id = $4
+    `,
+    [data.spell_type_id, data.spell_school_id, data.mana_cost, id]
+  );
+}
+
+async function updatePotion(id, data) {
+  await updateInventoryBase(id, data.name, data.value, data.weight);
+
+  await pool.query(
+    `UPDATE potions
+     SET
+      potion_type_id = $1,
+      duration_seconds = $2
+     WHERE shop_inventory_id = $3
+    `,
+    [data.potion_type_id, data.duration_seconds, id]
+  );
+}
+
+async function deleteItem(id) {
+  await pool.query(
+    `DELETE FROM shop_inventory
+     WHERE id = $1`,
+    [id]
+  );
+}
+
 module.exports = {
   getAllInventory,
   getAllWeapons,
@@ -234,4 +306,9 @@ module.exports = {
   getWeapon,
   getTome,
   getPotion,
+  updateInventoryBase,
+  updateWeapon,
+  updateTome,
+  updatePotion,
+  deleteItem,
 };

@@ -11,10 +11,11 @@
       <% tomes.forEach((tome) => { %>
       <li>
         id: <%= tome.shop_inventory_id %>; name: <%= tome.name %>; spell type:
-        <%= tome.spell_type_id %>; spell school: <%= tome.spell_school_id %>;
-        mana cost: <%= tome.mana_cost %>;
+        <%= spellTypes.find(type => type.id === tome.spell_type_id).name %>;
+        spell school: <%= spellSchools.find(school => school.id ===
+        tome.spell_school_id).name %>; mana cost: <%= tome.mana_cost %>;
         <a href="/tomes/<%= tome.shop_inventory_id %>/update">Update</a>
-        <form action="/<%= tome.id %>/delete" method="POST">
+        <form action="/<%= tome.shop_inventory_id %>/delete" method="POST">
           <button
             type="submit"
             onclick="return confirm('Are you sure this tome no longer belongs?');"

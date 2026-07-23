@@ -10,8 +10,9 @@
     <ul>
       <% inventory.forEach((item) => { %>
       <li>
-        id: <%= item.id %>; name: <%= item.name %>; type: <%= item.item_type_id
-        %>; value: <%= item.value %>; weight: <%= item.weight %>;
+        id: <%= item.id %>; name: <%= item.name %>; type: <%=
+        itemTypes.find(type => type.id === item.item_type_id).name %>; value:
+        <%= item.value %>; weight: <%= item.weight %>;
       </li>
       <% }) %>
     </ul>

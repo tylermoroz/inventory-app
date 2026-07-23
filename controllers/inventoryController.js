@@ -48,6 +48,7 @@ async function getInventory(req, res) {
     db.getAllInventory(),
     db.getItemTypes(),
   ]);
+  console.log("ITEM TYPES: ", itemTypes);
   console.log("Inventory: ", inventory);
   res.render("inventory", {
     title: "High Wreath Wares",
@@ -223,24 +224,88 @@ async function potionUpdateGet(req, res) {
   });
 }
 
-function inventoryUpdatePost(req, res) {
-  const item = wares.getItem(req.params.id);
+async function weaponUpdatePost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render("updateInventory", {
-      title: "Update Inventory",
-      item: item,
+    const [dbWeapon, weaponTypes, affinityTypes] = await Promise.all([
+      db.getWeapon(req.params.id),
+      db.getWeaponTypes(),
+      db.getAffinityTypes(),
+    ]);
+
+    const weapon = {
+      ...dbWeapon,
+      ...req.body,
+    };
+
+    return res.status(400).render("updateWeapon", {
+      title: "Update Weapon",
+      weapon,
+      weaponTypes,
+      affinityTypes,
       errors: errors.array(),
     });
   }
-  const { type, name, affinity } = matchedData(req);
-  wares.updateItem(req.params.id, { type, name, affinity });
-  res.redirect("/");
+  const data = matchedData(req);
+  await db.updateWeapon(req.params.id, data);
+  res.redirect("/weapons");
 }
 
-function deleteItemPost(req, res) {
-  wares.deleteItem(req.params.id);
-  res.redirect("/");
+async function updateTomePost(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const [dbTome, spellTypes, spellSchools] = await Promise.all([
+      db.getTome(req.params.id),
+      db.getSpellTypes(),
+      db.getSpellSchools(),
+    ]);
+
+    const tome = {
+      ...dbTome,
+      ...req.body,
+    };
+
+    return res.status(400).render("updateTome", {
+      title: "Update Tome",
+      tome,
+      spellTypes,
+      spellSchools,
+      errors: errors.array(),
+    });
+  }
+  const data = matchedData(req);
+  await db.updateTome(req.params.id, data);
+  res.redirect("/tomes");
+}
+
+async function updatePotionPost(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const [dbPotion, potionTypes] = await Promise.all([
+      db.getPotion(req.params.id),
+      db.getPotionTypes(),
+    ]);
+
+    const potion = {
+      ...dbPotion,
+      ...req.body,
+    };
+
+    return res.status(400).render("updatePotion", {
+      title: "Update Potion",
+      potion,
+      potionTypes,
+      errors: errors.array(),
+    });
+  }
+  const data = matchedData(req);
+  await db.updatePotion(req.params.id, data);
+  res.redirect("/potions");
+}
+
+async function deleteItemPost(req, res) {
+  await db.deleteItem(req.params.id);
+  res.redirect(req.get("Referer") || "/");
 }
 
 module.exports = {
@@ -257,6 +322,8 @@ module.exports = {
   weaponUpdateGet,
   tomeUpdateGet,
   potionUpdateGet,
-  inventoryUpdatePost,
+  weaponUpdatePost,
+  updateTomePost,
+  updatePotionPost,
   deleteItemPost,
 };

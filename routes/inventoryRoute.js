@@ -26,14 +26,26 @@ inventoryRouter.post(
 );
 
 inventoryRouter.get("/weapons/:id/update", inventoryController.weaponUpdateGet);
-inventoryRouter.get("/tomes/:id/update", inventoryController.tomeUpdateGet);
-inventoryRouter.get("/potions/:id/update", inventoryController.potionUpdateGet);
+inventoryRouter.post(
+  "/weapons/:id/update",
+  inventoryController.validateWeaponPost,
+  inventoryController.weaponUpdatePost
+);
 
-// inventoryRouter.post(
-//   "/:id/update",
-//   inventoryController.validatePost,
-//   inventoryController.inventoryUpdatePost
-// );
-// inventoryRouter.post("/:id/delete", inventoryController.deleteItemPost);
+inventoryRouter.get("/tomes/:id/update", inventoryController.tomeUpdateGet);
+inventoryRouter.post(
+  "/tomes/:id/update",
+  inventoryController.validateTomePost,
+  inventoryController.updateTomePost
+);
+
+inventoryRouter.get("/potions/:id/update", inventoryController.potionUpdateGet);
+inventoryRouter.post(
+  "/potions/:id/update",
+  inventoryController.validatePotionPost,
+  inventoryController.updatePotionPost
+);
+
+inventoryRouter.post("/:id/delete", inventoryController.deleteItemPost);
 
 module.exports = inventoryRouter;
