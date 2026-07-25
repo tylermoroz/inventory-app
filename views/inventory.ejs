@@ -4,8 +4,7 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <%- include("./partials/navbar", {itemTypes, weaponTypes, affinityTypes, spellTypes,
-    potionTypes}) %> <%- include("./partials/errors") %>
+    <%- include("./partials/navbar", {itemTypes, weaponTypes, affinityTypes, spellTypes, spellSchools, potionTypes}) %> <%- include("./partials/errors") %>
     <h1><%= title %></h1>
     <ul>
       <% inventory.forEach((item) => { %>

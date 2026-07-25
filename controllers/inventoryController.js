@@ -50,6 +50,7 @@ async function getInventory(req, res) {
     weaponTypes,
     affinityTypes,
     spellTypes,
+    spellSchools,
     potionTypes,
   ] = await Promise.all([
     db.getAllInventory(),
@@ -57,6 +58,7 @@ async function getInventory(req, res) {
     db.getWeaponTypes(),
     db.getAffinityTypes(),
     db.getSpellTypes(),
+    db.getSpellSchools(),
     db.getPotionTypes(),
   ]);
   console.log("ITEM TYPES: ", itemTypes);
@@ -67,6 +69,7 @@ async function getInventory(req, res) {
     weaponTypes,
     affinityTypes,
     spellTypes,
+    spellSchools,
     potionTypes,
     inventory,
   });
@@ -79,6 +82,7 @@ async function getWeapons(req, res) {
     affinityTypes,
     itemTypes,
     spellTypes,
+    spellSchools,
     potionTypes,
   ] = await Promise.all([
     db.getAllWeapons(),
@@ -86,6 +90,7 @@ async function getWeapons(req, res) {
     db.getAffinityTypes(),
     db.getItemTypes(),
     db.getSpellTypes(),
+    db.getSpellSchools(),
     db.getPotionTypes(),
   ]);
   console.log("Weapons: ", weapons);
@@ -96,6 +101,7 @@ async function getWeapons(req, res) {
     affinityTypes,
     itemTypes,
     spellTypes,
+    spellSchools,
     potionTypes,
   });
 }
@@ -139,6 +145,7 @@ async function getPotions(req, res) {
     weaponTypes,
     affinityTypes,
     spellTypes,
+    spellSchools,
   ] = await Promise.all([
     db.getAllPotions(),
     db.getPotionTypes(),
@@ -146,6 +153,7 @@ async function getPotions(req, res) {
     db.getWeaponTypes(),
     db.getAffinityTypes(),
     db.getSpellTypes(),
+    db.getSpellSchools(),
   ]);
   console.log("Potions: ", potions);
   res.render("potions", {
@@ -156,6 +164,7 @@ async function getPotions(req, res) {
     weaponTypes,
     affinityTypes,
     spellTypes,
+    spellSchools,
   });
 }
 

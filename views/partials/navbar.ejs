@@ -37,21 +37,43 @@
             </ul>
           </li>
         <% } else if (type.name === "Tome")  { %>
-          <% spellTypes.forEach((spellType) => { %>
-            <li class="dropdown-item">
-              <a href="/<%= spellType.name %>">
-                <span> <%= spellType.name %> </span>
-              </a>
-            </li>
-          <% }) %>
+          <li class="dropdown-item has-submenu">
+            <span>Spell Types</span>
+            <ul class="submenu">
+              <% spellTypes.forEach((spellType) => { %>
+                <li class="submenu-item">
+                  <a href="/tomes/type/<%= spellType.name %>">
+                    <span> <%= spellType.name %> </span>
+                  </a>
+                </li>
+              <% }) %>
+            </ul>
+          </li>
+          <li class="dropdown-item has-submenu">
+            <span>Spell Schools</span>
+            <ul class="submenu">
+              <% spellSchools.forEach((spellSchool) => { %>
+                <li class="submenu-item">
+                  <a href="/tomes/school/<%= spellSchool.name %>">
+                    <span> <%= spellSchool.name %> </span>
+                  </a>
+                </li>
+              <% }) %>
+            </ul>
+          </li>  
         <% } else if (type.name === "Potion") { %>
-          <% potionTypes.forEach((potionType) => { %>
-            <li class="dropdown-item">
-              <a href="/<%= potionType.name %>">
-                <span> <%= potionType.name %> </span>
-              </a>
-            </li>
-          <% }) %>  
+          <li class="dropdown-item has-submenu">
+            <span>Potion Types</span>
+            <ul class="submenu">
+              <% potionTypes.forEach((potionType) => { %>
+                <li class="submenu-item">
+                  <a href="/potions/type/<%= potionType.name %>">
+                    <span> <%= potionType.name %> </span>
+                  </a>
+                </li>
+              <% }) %> 
+            </ul>
+          </li> 
         <% } %>
       </ul>
     </li>
