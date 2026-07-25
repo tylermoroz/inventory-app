@@ -35,4 +35,18 @@ nav {
 
 .dropdown-item {
   padding: 0.2em;
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: relative;
+}
+
+.submenu-item {
+  list-style-type: none;
+}
+
+.dropdown-item:hover > .submenu {
+  display: block;
 }

@@ -8,10 +8,52 @@
     <% itemTypes.forEach((type) => { %>
     <li class="nav-item">
       <a href="/<%= type.name %>s">
-        <span>
-          <%= type.name.charAt(0).toUpperCase() + type.name.slice(1) %>s
-        </span>
+        <span> <%= type.name %>s </span>
       </a>
+      <ul class="dropdown">
+        <% if (type.name === "Weapon") { %>
+          <li class="dropdown-item has-submenu">
+            <span>Weapon Types</span>
+            <ul class="submenu">
+              <% weaponTypes.forEach((weaponType) => { %>
+                <li class="submenu-item">
+                  <a href="/weapons/type/<%= weaponType.name %>">
+                    <%= weaponType.name %>
+                  </a>
+                </li>
+              <% }) %>
+            </ul>
+          </li> 
+          <li class="dropdown-item has-submenu">
+            <span>Affinities</span>
+            <ul class="submenu">
+              <% affinityTypes.forEach((affinityType) => { %>
+                <li class="submenu-item">
+                  <a href="/weapon/affinity/<%= affinityType.name %>">
+                    <%= affinityType.name %>
+                  </a>
+                </li>
+              <% }) %>
+            </ul>
+          </li>
+        <% } else if (type.name === "Tome")  { %>
+          <% spellTypes.forEach((spellType) => { %>
+            <li class="dropdown-item">
+              <a href="/<%= spellType.name %>">
+                <span> <%= spellType.name %> </span>
+              </a>
+            </li>
+          <% }) %>
+        <% } else if (type.name === "Potion") { %>
+          <% potionTypes.forEach((potionType) => { %>
+            <li class="dropdown-item">
+              <a href="/<%= potionType.name %>">
+                <span> <%= potionType.name %> </span>
+              </a>
+            </li>
+          <% }) %>  
+        <% } %>
+      </ul>
     </li>
     <% }) %>
   </ul>

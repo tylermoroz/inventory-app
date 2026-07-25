@@ -44,25 +44,49 @@ const validatePotionPost = [
 ];
 
 async function getInventory(req, res) {
-  const [inventory, itemTypes] = await Promise.all([
+  const [
+    inventory,
+    itemTypes,
+    weaponTypes,
+    affinityTypes,
+    spellTypes,
+    potionTypes,
+  ] = await Promise.all([
     db.getAllInventory(),
     db.getItemTypes(),
+    db.getWeaponTypes(),
+    db.getAffinityTypes(),
+    db.getSpellTypes(),
+    db.getPotionTypes(),
   ]);
   console.log("ITEM TYPES: ", itemTypes);
   console.log("Inventory: ", inventory);
   res.render("inventory", {
     title: "High Wreath Wares",
     itemTypes,
+    weaponTypes,
+    affinityTypes,
+    spellTypes,
+    potionTypes,
     inventory,
   });
 }
 
 async function getWeapons(req, res) {
-  const [weapons, weaponTypes, affinityTypes, itemTypes] = await Promise.all([
+  const [
+    weapons,
+    weaponTypes,
+    affinityTypes,
+    itemTypes,
+    spellTypes,
+    potionTypes,
+  ] = await Promise.all([
     db.getAllWeapons(),
     db.getWeaponTypes(),
     db.getAffinityTypes(),
     db.getItemTypes(),
+    db.getSpellTypes(),
+    db.getPotionTypes(),
   ]);
   console.log("Weapons: ", weapons);
   res.render("weapons", {
@@ -71,15 +95,28 @@ async function getWeapons(req, res) {
     weaponTypes,
     affinityTypes,
     itemTypes,
+    spellTypes,
+    potionTypes,
   });
 }
 
 async function getTomes(req, res) {
-  const [tomes, spellTypes, spellSchools, itemTypes] = await Promise.all([
+  const [
+    tomes,
+    spellTypes,
+    spellSchools,
+    itemTypes,
+    weaponTypes,
+    affinityTypes,
+    potionTypes,
+  ] = await Promise.all([
     db.getAllTomes(),
     db.getSpellTypes(),
     db.getSpellSchools(),
     db.getItemTypes(),
+    db.getWeaponTypes(),
+    db.getAffinityTypes(),
+    db.getPotionTypes(),
   ]);
   console.log("Tomes: ", tomes);
   res.render("tomes", {
@@ -88,14 +125,27 @@ async function getTomes(req, res) {
     spellTypes,
     spellSchools,
     itemTypes,
+    weaponTypes,
+    affinityTypes,
+    potionTypes,
   });
 }
 
 async function getPotions(req, res) {
-  const [potions, potionTypes, itemTypes] = await Promise.all([
+  const [
+    potions,
+    potionTypes,
+    itemTypes,
+    weaponTypes,
+    affinityTypes,
+    spellTypes,
+  ] = await Promise.all([
     db.getAllPotions(),
     db.getPotionTypes(),
     db.getItemTypes(),
+    db.getWeaponTypes(),
+    db.getAffinityTypes(),
+    db.getSpellTypes(),
   ]);
   console.log("Potions: ", potions);
   res.render("potions", {
@@ -103,6 +153,9 @@ async function getPotions(req, res) {
     potions,
     potionTypes,
     itemTypes,
+    weaponTypes,
+    affinityTypes,
+    spellTypes,
   });
 }
 
