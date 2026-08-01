@@ -27,14 +27,21 @@
             </option>
             <% }) %>
         </select>
-        <label for="mana_cost">Mana Cost: </label>
-        <input type="range" name="mana_cost" id="mana_cost" min="1" max="100" value="<%= tome.mana_cost %>" />
-        <label for="weight">Weight: </label>
-        <input type="range" name="weight" id="weight" min="1" max="100" value="<%= tome.weight %>" />
+        <div class="slider-container">
+            <label for="mana_cost">Mana Cost: </label>
+            <input class="stat-slider" type="range" name="mana_cost" id="mana_cost" min="1" max="100" value="<%= tome.mana_cost %>" />
+            <span class="slider-value"><%= tome.mana_cost %></span>
+        </div>
+        <div class="slider-container">
+            <label for="weight">Weight: </label>
+            <input class="stat-slider" type="range" name="weight" id="weight" min="1" max="100" value="<%= tome.weight %>" />
+            <span class="slider-value"><%= tome.weight %></span>
+        </div>
         <label for="value">Value: </label>
         <input type="number" name="value" id="value" min="1" max="1000" value="<%= tome.value %>" />
       <button type="submit">Update Tome</button>
     </form>
     <a href="/tomes">Back to Tomes</a>
+    <script src="/scripts/sliders.js"></script>
 </body>
 </html>

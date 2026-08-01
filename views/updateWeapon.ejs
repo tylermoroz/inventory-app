@@ -27,23 +27,34 @@
             </option>
             <% }) %>
         </select>
-        <label for="damage">Damage: </label>
-        <input type="range" name="damage" id="damage" min="1" max="1000" value="<%= weapon.damage %>" />
-        <label for="durability">Durability: </label>
-        <input
+        <div class="slider-container">
+          <label for="damage">Damage: </label>
+          <input class="stat-slider" type="range" name="damage" id="damage" min="1" max="1000" value="<%= weapon.damage %>" />
+          <span class="slider-value"><%= weapon.damage %></span>
+        </div>
+        <div class="slider-container">
+          <label for="durability">Durability: </label>
+          <input
+            class="stat-slider"
             type="range"
             name="durability"
             id="durability"
             min="1"
             max="100"
             value="<%= weapon.durability %>"
-        />
-        <label for="weight">Weight: </label>
-        <input type="range" name="weight" id="weight" min="1" max="100" value="<%= weapon.weight %>" />
+          />
+          <span class="slider-value"><%= weapon.durability %></span>
+        </div>
+        <div class="slider-container">
+          <label class="stat-slider" for="weight">Weight: </label>
+          <input type="range" name="weight" id="weight" min="1" max="100" value="<%= weapon.weight %>" />
+          <span class="slider-value"><%= weapon.weight %></span>
+        </div>
         <label for="value">Value: </label>
         <input type="number" name="value" id="value" min="1" max="1000" value="<%= weapon.value %>" />
       <button type="submit">Update Weapon</button>
     </form>
     <a href="/weapons">Back to Weapons</a>
+    <script src="/scripts/sliders.js"></script>
   </body>
 </html>
