@@ -4,8 +4,8 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <%- include("./partials/navbar", {itemTypes, weaponTypes, spellTypes, spellSchools}) %> <%-
-    include("./partials/addPotion", {potionTypes}) %>
+    <%- include("../partials/navbar", {itemTypes, weaponTypes, spellTypes, spellSchools}) %> <%-
+    include("../partials/addPotion", {potionTypes}) %>
     <h1><%= title %></h1>
     <ul>
       <% potions.forEach((potion) => { %>

@@ -94,7 +94,7 @@ async function getWeapons(req, res) {
     db.getPotionTypes(),
   ]);
   console.log("Weapons: ", weapons);
-  res.render("weapons", {
+  res.render("weapons/weapons", {
     title: "Weapons of High Wreath Wares",
     weapons,
     weaponTypes,
@@ -125,7 +125,7 @@ async function getTomes(req, res) {
     db.getPotionTypes(),
   ]);
   console.log("Tomes: ", tomes);
-  res.render("tomes", {
+  res.render("tomes/tomes", {
     title: "Tomes of High Wreath Wares",
     tomes,
     spellTypes,
@@ -156,7 +156,7 @@ async function getPotions(req, res) {
     db.getSpellSchools(),
   ]);
   console.log("Potions: ", potions);
-  res.render("potions", {
+  res.render("potions/potions", {
     title: "Potions of High Wreath Wares",
     potions,
     potionTypes,
@@ -179,7 +179,7 @@ async function createWeaponPost(req, res) {
       db.getItemTypes(),
     ]);
 
-    return res.status(400).render("weapons", {
+    return res.status(400).render("weapons/weapons", {
       title: "Weapons of High Wreath Wares",
       weapons,
       weaponTypes,
@@ -204,7 +204,7 @@ async function createTomePost(req, res) {
       db.getSpellSchools(),
       db.getItemTypes(),
     ]);
-    return res.status(400).render("tomes", {
+    return res.status(400).render("tomes/tomes", {
       title: "Tomes of High Wreath Wares",
       tomes,
       spellTypes,
@@ -228,7 +228,7 @@ async function createPotionPost(req, res) {
       db.getPotionTypes(),
       db.getItemTypes(),
     ]);
-    return res.status(400).render("potions", {
+    return res.status(400).render("potions/potions", {
       title: "Potions of High Wreath Wares",
       potions,
       potionTypes,
@@ -250,7 +250,7 @@ async function weaponUpdateGet(req, res) {
     db.getAffinityTypes(),
   ]);
 
-  res.render("updateWeapon", {
+  res.render("weapons/updateWeapon", {
     title: "Update Weapon",
     weapon,
     weaponTypes,
@@ -265,7 +265,7 @@ async function tomeUpdateGet(req, res) {
     db.getSpellSchools(),
   ]);
 
-  res.render("updateTome", {
+  res.render("tomes/updateTome", {
     title: "Update Tome",
     tome,
     spellTypes,
@@ -279,7 +279,7 @@ async function potionUpdateGet(req, res) {
     db.getPotionTypes(),
   ]);
 
-  res.render("updatePotion", {
+  res.render("potions/updatePotion", {
     title: "Update Potion",
     potion,
     potionTypes,
@@ -300,7 +300,7 @@ async function weaponUpdatePost(req, res) {
       ...req.body,
     };
 
-    return res.status(400).render("updateWeapon", {
+    return res.status(400).render("weapons/updateWeapon", {
       title: "Update Weapon",
       weapon,
       weaponTypes,
@@ -327,7 +327,7 @@ async function updateTomePost(req, res) {
       ...req.body,
     };
 
-    return res.status(400).render("updateTome", {
+    return res.status(400).render("tomes/updateTome", {
       title: "Update Tome",
       tome,
       spellTypes,
@@ -353,7 +353,7 @@ async function updatePotionPost(req, res) {
       ...req.body,
     };
 
-    return res.status(400).render("updatePotion", {
+    return res.status(400).render("potions/updatePotion", {
       title: "Update Potion",
       potion,
       potionTypes,
