@@ -11,6 +11,16 @@ inventoryRouter.post(
   inventoryController.createWeaponPost
 );
 
+inventoryRouter.get(
+  "/weapons/type/:type",
+  inventoryController.getWeaponsByType
+);
+
+inventoryRouter.get(
+  "/weapons/affinity/:affinity",
+  inventoryController.getWeaponsByAffinity
+);
+
 inventoryRouter.get("/tomes", inventoryController.getTomes);
 inventoryRouter.post(
   "/tomes",
@@ -18,11 +28,26 @@ inventoryRouter.post(
   inventoryController.createTomePost
 );
 
+inventoryRouter.get(
+  "/tomes/type/:type",
+  inventoryController.getTomesBySpellType
+);
+
+inventoryRouter.get(
+  "/tomes/school/:school",
+  inventoryController.getTomesBySpellSchool
+);
+
 inventoryRouter.get("/potions", inventoryController.getPotions);
 inventoryRouter.post(
   "/potions",
   inventoryController.validatePotionPost,
   inventoryController.createPotionPost
+);
+
+inventoryRouter.get(
+  "/potions/type/:type",
+  inventoryController.getPotionsByType
 );
 
 inventoryRouter.get("/weapons/:id/update", inventoryController.weaponUpdateGet);

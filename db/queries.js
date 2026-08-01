@@ -53,6 +53,101 @@ async function getAllPotions() {
   return rows;
 }
 
+async function getWeaponsByType(weaponTypeName) {
+  const { rows } = await pool.query(
+    `SELECT 
+      weapons.*, 
+      shop_inventory.name, 
+      shop_inventory.item_type_id, 
+      shop_inventory.value, 
+      shop_inventory.weight
+     FROM weapons
+     JOIN shop_inventory 
+      ON weapons.shop_inventory_id = shop_inventory.id
+     JOIN weapon_type
+      ON weapons.weapon_type_id = weapon_type.id
+     WHERE weapon_type.name = $1`,
+    [weaponTypeName]
+  );
+  return rows;
+}
+
+async function getWeaponsByAffinity(weaponAffinityName) {
+  const { rows } = await pool.query(
+    `SELECT 
+      weapons.*,
+      shop_inventory.name,
+      shop_inventory.item_type_id,
+      shop_inventory.value,
+      shop_inventory.weight
+     FROM weapons
+     JOIN shop_inventory
+      ON weapons.shop_inventory_id = shop_inventory.id
+     JOIN affinity_type
+      ON weapons.affinity_type_id = affinity_type.id
+     WHERE affinity_type.name = $1`,
+    [weaponAffinityName]
+  );
+  return rows;
+}
+
+async function getTomesBySpellType(spellTypeName) {
+  const { rows } = await pool.query(
+    `SELECT 
+      tomes.*,
+      shop_inventory.name,
+      shop_inventory.item_type_id,
+      shop_inventory.value,
+      shop_inventory.weight
+     FROM tomes
+     JOIN shop_inventory
+      ON tomes.shop_inventory_id = shop_inventory.id
+     JOIN spell_type
+      ON tomes.spell_type_id = spell_type.id
+     WHERE spell_type.name = $1`,
+    [spellTypeName]
+  );
+  return rows;
+}
+
+async function getTomesBySpellSchool(spellSchoolName) {
+  const { rows } = await pool.query(
+    `SELECT 
+      tomes.*,
+      shop_inventory.name,
+      shop_inventory.item_type_id,
+      shop_inventory.value,
+      shop_inventory.weight
+     FROM tomes
+     JOIN shop_inventory
+      ON tomes.shop_inventory_id = shop_inventory.id
+     JOIN spell_school
+      ON tomes.spell_school_id = spell_school.id
+     WHERE spell_school.name = $1`,
+    [spellSchoolName]
+  );
+  return rows;
+}
+
+async function getPotionsByType(potionTypeName) {
+  const { rows } = await pool.query(
+    `SELECT 
+      potions.*,
+      shop_inventory.name,
+      shop_inventory.item_type_id,
+      shop_inventory.value,
+      shop_inventory.weight
+     FROM potions
+     JOIN shop_inventory
+      ON potions.shop_inventory_id = shop_inventory.id
+     JOIN potion_type
+      ON potions.potion_type_id = potion_type.id
+     WHERE potion_type.name = $1`,
+    [potionTypeName]
+  );
+  return rows;
+}
+
 async function insertInventoryBase(name, itemTypeId, value, weight) {
   const result = await pool.query(
     `INSERT INTO shop_inventory (
@@ -293,6 +388,11 @@ module.exports = {
   getAllWeapons,
   getAllTomes,
   getAllPotions,
+  getWeaponsByType,
+  getWeaponsByAffinity,
+  getTomesBySpellType,
+  getTomesBySpellSchool,
+  getPotionsByType,
   insertInventoryBase,
   insertWeapon,
   insertTome,

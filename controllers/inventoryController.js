@@ -61,8 +61,6 @@ async function getInventory(req, res) {
     db.getSpellSchools(),
     db.getPotionTypes(),
   ]);
-  console.log("ITEM TYPES: ", itemTypes);
-  console.log("Inventory: ", inventory);
   res.render("inventory", {
     title: "High Wreath Wares",
     itemTypes,
@@ -93,9 +91,68 @@ async function getWeapons(req, res) {
     db.getSpellSchools(),
     db.getPotionTypes(),
   ]);
-  console.log("Weapons: ", weapons);
   res.render("weapons/weapons", {
     title: "Weapons of High Wreath Wares",
+    weapons,
+    weaponTypes,
+    affinityTypes,
+    itemTypes,
+    spellTypes,
+    spellSchools,
+    potionTypes,
+  });
+}
+
+async function getWeaponsByType(req, res) {
+  const [
+    weapons,
+    weaponTypes,
+    affinityTypes,
+    itemTypes,
+    spellTypes,
+    spellSchools,
+    potionTypes,
+  ] = await Promise.all([
+    db.getWeaponsByType(req.params.type),
+    db.getWeaponTypes(),
+    db.getAffinityTypes(),
+    db.getItemTypes(),
+    db.getSpellTypes(),
+    db.getSpellSchools(),
+    db.getPotionTypes(),
+  ]);
+  res.render("weapons/weapons", {
+    title: `${req.params.type}s of High Wreath Wares`,
+    weapons,
+    weaponTypes,
+    affinityTypes,
+    itemTypes,
+    spellTypes,
+    spellSchools,
+    potionTypes,
+  });
+}
+
+async function getWeaponsByAffinity(req, res) {
+  const [
+    weapons,
+    weaponTypes,
+    affinityTypes,
+    itemTypes,
+    spellTypes,
+    spellSchools,
+    potionTypes,
+  ] = await Promise.all([
+    db.getWeaponsByAffinity(req.params.affinity),
+    db.getWeaponTypes(),
+    db.getAffinityTypes(),
+    db.getItemTypes(),
+    db.getSpellTypes(),
+    db.getSpellSchools(),
+    db.getPotionTypes(),
+  ]);
+  res.render("weapons/weapons", {
+    title: `${req.params.affinity} Weapons of High Wreath Wares`,
     weapons,
     weaponTypes,
     affinityTypes,
@@ -124,9 +181,68 @@ async function getTomes(req, res) {
     db.getAffinityTypes(),
     db.getPotionTypes(),
   ]);
-  console.log("Tomes: ", tomes);
   res.render("tomes/tomes", {
     title: "Tomes of High Wreath Wares",
+    tomes,
+    spellTypes,
+    spellSchools,
+    itemTypes,
+    weaponTypes,
+    affinityTypes,
+    potionTypes,
+  });
+}
+
+async function getTomesBySpellType(req, res) {
+  const [
+    tomes,
+    spellTypes,
+    spellSchools,
+    itemTypes,
+    weaponTypes,
+    affinityTypes,
+    potionTypes,
+  ] = await Promise.all([
+    db.getTomesBySpellType(req.params.type),
+    db.getSpellTypes(),
+    db.getSpellSchools(),
+    db.getItemTypes(),
+    db.getWeaponTypes(),
+    db.getAffinityTypes(),
+    db.getPotionTypes(),
+  ]);
+  res.render("tomes/tomes", {
+    title: `${req.params.type} Tomes of High Wreath Wares`,
+    tomes,
+    spellTypes,
+    spellSchools,
+    itemTypes,
+    weaponTypes,
+    affinityTypes,
+    potionTypes,
+  });
+}
+
+async function getTomesBySpellSchool(req, res) {
+  const [
+    tomes,
+    spellTypes,
+    spellSchools,
+    itemTypes,
+    weaponTypes,
+    affinityTypes,
+    potionTypes,
+  ] = await Promise.all([
+    db.getTomesBySpellSchool(req.params.school),
+    db.getSpellTypes(),
+    db.getSpellSchools(),
+    db.getItemTypes(),
+    db.getWeaponTypes(),
+    db.getAffinityTypes(),
+    db.getPotionTypes(),
+  ]);
+  res.render("tomes/tomes", {
+    title: `${req.params.school} Tomes of High Wreath Wares`,
     tomes,
     spellTypes,
     spellSchools,
@@ -155,9 +271,38 @@ async function getPotions(req, res) {
     db.getSpellTypes(),
     db.getSpellSchools(),
   ]);
-  console.log("Potions: ", potions);
   res.render("potions/potions", {
     title: "Potions of High Wreath Wares",
+    potions,
+    potionTypes,
+    itemTypes,
+    weaponTypes,
+    affinityTypes,
+    spellTypes,
+    spellSchools,
+  });
+}
+
+async function getPotionsByType(req, res) {
+  const [
+    potions,
+    potionTypes,
+    itemTypes,
+    weaponTypes,
+    affinityTypes,
+    spellTypes,
+    spellSchools,
+  ] = await Promise.all([
+    db.getPotionsByType(req.params.type),
+    db.getPotionTypes(),
+    db.getItemTypes(),
+    db.getWeaponTypes(),
+    db.getAffinityTypes(),
+    db.getSpellTypes(),
+    db.getSpellSchools(),
+  ]);
+  res.render("potions/potions", {
+    title: `${req.params.type} Potions of High Wreath Wares`,
     potions,
     potionTypes,
     itemTypes,
@@ -171,7 +316,6 @@ async function getPotions(req, res) {
 async function createWeaponPost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log("ERRORS: ", errors);
     const [weapons, weaponTypes, affinityTypes, itemTypes] = await Promise.all([
       db.getAllWeapons(),
       db.getWeaponTypes(),
@@ -188,8 +332,6 @@ async function createWeaponPost(req, res) {
       errors: errors.array(),
     });
   }
-  console.log("BODY:", req.body);
-  console.log("MATCHED:", matchedData(req));
   const data = matchedData(req);
   await db.insertWeapon(data);
   return res.redirect("/weapons");
@@ -213,8 +355,6 @@ async function createTomePost(req, res) {
       errors: errors.array(),
     });
   }
-  console.log("BODY:", req.body);
-  console.log("MATCHED:", matchedData(req));
   const data = matchedData(req);
   await db.insertTome(data);
   return res.redirect("/tomes");
@@ -236,8 +376,6 @@ async function createPotionPost(req, res) {
       errors: errors.array(),
     });
   }
-  console.log("BODY:", req.body);
-  console.log("MATCHED:", matchedData(req));
   const data = matchedData(req);
   await db.insertPotion(data);
   return res.redirect("/potions");
@@ -373,8 +511,13 @@ async function deleteItemPost(req, res) {
 module.exports = {
   getInventory,
   getWeapons,
+  getWeaponsByType,
+  getWeaponsByAffinity,
   getTomes,
+  getTomesBySpellType,
+  getTomesBySpellSchool,
   getPotions,
+  getPotionsByType,
   createWeaponPost,
   createTomePost,
   createPotionPost,
