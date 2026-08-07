@@ -1,5 +1,6 @@
 h1 {
-  font-size: 24px;
+  font-size: 42px;
+  margin-left: 1em;
 }
 
 nav {
@@ -50,4 +51,41 @@ nav {
 
 .dropdown-item:hover > .submenu {
   display: block;
+}
+
+.inventory-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  flex-wrap: wrap;
+  margin: 2em;
+}
+
+.inventory-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 12em;
+  height: 16em;
+  padding: 5px;
+  border: 2px solid slategrey;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.item-name-container h2 {
+  margin-top: 0.2em;
+}
+
+.item-info-container p {
+  margin: 0.2em;
+}
+
+.item-edit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-edit-container form {
+  margin: 0;
 }

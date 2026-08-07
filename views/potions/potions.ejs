@@ -7,22 +7,34 @@
     <%- include("../partials/navbar", {itemTypes, weaponTypes, spellTypes, spellSchools}) %> <%-
     include("../partials/addPotion", {potionTypes}) %>
     <h1><%= title %></h1>
-    <ul>
+    <ul class="inventory-container">
       <% potions.forEach((potion) => { %>
-      <li>
-        id: <%= potion.shop_inventory_id %>; name: <%= potion.name %>; potion
-        type: <%= potionTypes.find(type => type.id ===
-        potion.potion_type_id).name %>; duration(seconds): <%=
-        potion.duration_seconds %>;
-        <a href="/potions/<%= potion.shop_inventory_id %>/update">Update</a>
-        <form action="/<%= potion.shop_inventory_id %>/delete" method="POST">
-          <button
-            type="submit"
-            onclick="return confirm('Are you sure this potion no longer belongs?');"
-          >
-            Delete
-          </button>
-        </form>
+      <li class="inventory-item">
+        <div class="item-name-container">
+          <h2 class="item-name"><%= potion.name %></h2>
+        </div>
+        <div class="flex-div">
+          <div class="item-info-container">
+            <p class="item-id">id: <%= potion.shop_inventory_id %></p>
+            <p class="potion-type">Potion Type: <%= potionTypes.find(type => type.id ===
+              potion.potion_type_id).name %></p>
+            <p class="potion-duration">Duration(seconds): <%=
+              potion.duration_seconds %></p>
+            <p class="item-weight">Weight: <%= potion.weight %></p>
+            <p class="item-value">Value: <%=potion.value %></p>
+          </div>
+          <div class="item-edit-container">
+            <a href="/potions/<%= potion.shop_inventory_id %>/update">Update</a>
+            <form action="/<%= potion.shop_inventory_id %>/delete" method="POST">
+              <button
+                type="submit"
+                onclick="return confirm('Are you sure this potion no longer belongs?');"
+              >
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
       </li>
       <% }) %>
     </ul>
