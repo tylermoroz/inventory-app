@@ -32,7 +32,10 @@ nav {
 
 .nav-item:hover .dropdown {
   display: block;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.849);
+  border: 1px solid grey;
+  border-radius: 5px;
+  white-space: nowrap;
 }
 
 .dropdown-item {
@@ -42,7 +45,6 @@ nav {
 
 .submenu {
   display: none;
-  position: relative;
 }
 
 .submenu-item {
@@ -51,6 +53,7 @@ nav {
 
 .dropdown-item:hover > .submenu {
   display: block;
+  margin-left: -1em;
 }
 
 .inventory-container {
@@ -68,8 +71,6 @@ nav {
   width: 12em;
   height: 16em;
   padding: 5px;
-  border: 2px solid slategrey;
-  border-radius: 5px;
   text-align: center;
 }
 
@@ -88,4 +89,22 @@ nav {
 
 .item-edit-container form {
   margin: 0;
+}
+
+.weapon {
+  border: 2px solid rgb(219, 60, 32);
+  background-color: rgb(226, 164, 153);
+  border-radius: 5px;
+}
+
+.tome {
+  border: 2px solid rgb(15, 128, 241);
+  background-color: rgb(148, 183, 218);
+  border-radius: 5px;
+}
+
+.potion {
+  border: 2px solid rgb(86, 148, 28);
+  background-color: rgb(180, 214, 148);
+  border-radius: 5px;
 }

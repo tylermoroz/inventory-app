@@ -8,7 +8,7 @@
     <h1><%= title %></h1>
     <ul class="inventory-container">
       <% inventory.forEach((item) => { %>
-      <li class="inventory-item"> 
+      <li class="inventory-item <%= item.item_type_id === 1 ? 'weapon' : item.item_type_id === 2 ? 'tome' : 'potion' %>"> 
         <div class="item-name-container">
           <h2 class="item-name"><%= item.name %></h2>
         </div>
