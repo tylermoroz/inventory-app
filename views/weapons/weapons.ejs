@@ -6,23 +6,34 @@
   <body>
     <%- include("../partials/navbar", {itemTypes, spellTypes, spellSchools, potionTypes}) %> <%-
     include("../partials/addWeapon", {weaponTypes, affinityTypes}) %>
+    <%- include("../partials/errors") %>
     <h1><%= title %></h1>
     <ul class="inventory-container">
       <% weapons.forEach((weapon) => { %>
+        <%
+          const weaponType = weaponTypes.find(
+            (type) => type.id === weapon.weapon_type_id
+          );
+
+          const affinityType = affinityTypes.find(
+            (affinity) => affinity.id === weapon.affinity_type_id
+          ); 
+        %>
       <li class="inventory-item weapon">
         <div class="item-name-container">
           <h2 class="item-name"><%= weapon.name %></h2>
         </div>
+        <div class="image-container">
+          <img src="/images/weapons/<%= affinityType.name.toLowerCase() %>_<%= weaponType.name.toLowerCase() %>.png" alt="<%= weapon.name %>, <%= affinityType.name %> <%= weaponType.name %>">
+        </div>
         <div class="flex-div">
           <div class="item-info-container">
             <p class="item-id">id: <%= weapon.shop_inventory_id %></p>
-            <p class="weapon-type"><%= weaponTypes.find(type => type.id ===
-              weapon.weapon_type_id).name %></p>
+            <p class="weapon-type"><%= weaponType.name %></p>
             <p class="weapon-damage">Damage: <%= weapon.damage %></p>
             <p class="weapon-durability">Durability: <%= weapon.durability %></p>
             <p class="weapon-affinity">Affinity: <%=
-              affinityTypes.find(affinity => affinity.id ===
-              weapon.affinity_type_id).name %></p>
+              affinityType.name %></p>
             <p class="weapon-weight">Weight: <%= weapon.weight %></p>
             <p class="weapon-value">Value: <%= weapon.value %></p>
           </div>

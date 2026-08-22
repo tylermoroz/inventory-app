@@ -12,6 +12,28 @@
         <div class="item-name-container">
           <h2 class="item-name"><%= item.name %></h2>
         </div>
+        <div class="image-container">
+          <% if (item.item_type_id === 1){ %>
+            
+              
+                <%
+                  const weapon = weapons.find(
+                    weapon => weapon.shop_inventory_id === item.id
+                  );
+
+                  const weaponType = weaponTypes.find(
+                    type => type.id === weapon.weapon_type_id
+                  );
+
+                  const affinityType = affinityTypes.find(
+                    affinity => affinity.id === weapon.affinity_type_id
+                  ); 
+                %>
+                <img src="/images/weapons/<%= affinityType.name.toLowerCase() %>_<%= weaponType.name.toLowerCase() %>.png" alt="<%= weapon.name %>, <%= affinityType.name %> <%= weaponType.name %>">
+              
+            
+          <% } %>
+        </div>
         <div class="item-info-container">
           <p class="item-id">id: <%= item.id %></p>
           <p class="item-type"><%=

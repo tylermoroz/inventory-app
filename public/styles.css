@@ -1,3 +1,7 @@
+body {
+  background-color: antiquewhite;
+}
+
 h1 {
   font-size: 42px;
   margin-left: 1em;
@@ -69,13 +73,23 @@ nav {
   flex-direction: column;
   justify-content: space-between;
   width: 12em;
-  height: 16em;
+  height: auto;
   padding: 5px;
   text-align: center;
 }
 
 .item-name-container h2 {
   margin-top: 0.2em;
+}
+
+.image-container {
+  margin-bottom: 0.8em;
+}
+
+.image-container img {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
 }
 
 .item-info-container p {

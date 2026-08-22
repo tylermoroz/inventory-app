@@ -4,7 +4,7 @@ const db = require("../db/queries");
 const validateWeaponPost = [
   body("name")
     .trim()
-    .matches(/^[a-zA-Z\s-]+$/)
+    .matches(/^[a-zA-Z\s'-]+$/)
     .withMessage("Weapon name must only contain letters, spaces, or hyphens.")
     .isLength({ min: 1, max: 50 })
     .withMessage("Weapon name must be between 1 and 50 characters."),
@@ -19,7 +19,7 @@ const validateWeaponPost = [
 const validateTomePost = [
   body("name")
     .trim()
-    .matches(/^[a-zA-Z\s-]+$/)
+    .matches(/^[a-zA-Z\s'-]+$/)
     .withMessage("Tome name must only contain letters, spaces, or hyphens.")
     .isLength({ min: 1, max: 50 })
     .withMessage("Tome name must be between 1 and 50 characters."),
@@ -33,7 +33,7 @@ const validateTomePost = [
 const validatePotionPost = [
   body("name")
     .trim()
-    .matches(/^[a-zA-Z\s-]+$/)
+    .matches(/^[a-zA-Z\s'-]+$/)
     .withMessage("Potion name must only contain letters, spaces, or hyphens.")
     .isLength({ min: 1, max: 50 })
     .withMessage("Potion name must be between 1 and 50 characters."),
@@ -46,6 +46,7 @@ const validatePotionPost = [
 async function getInventory(req, res) {
   const [
     inventory,
+    weapons,
     itemTypes,
     weaponTypes,
     affinityTypes,
@@ -54,6 +55,7 @@ async function getInventory(req, res) {
     potionTypes,
   ] = await Promise.all([
     db.getAllInventory(),
+    db.getAllWeapons(),
     db.getItemTypes(),
     db.getWeaponTypes(),
     db.getAffinityTypes(),
@@ -63,13 +65,14 @@ async function getInventory(req, res) {
   ]);
   res.render("inventory", {
     title: "High Wreath Wares",
+    inventory,
+    weapons,
     itemTypes,
     weaponTypes,
     affinityTypes,
     spellTypes,
     spellSchools,
     potionTypes,
-    inventory,
   });
 }
 
@@ -315,20 +318,34 @@ async function getPotionsByType(req, res) {
 
 async function createWeaponPost(req, res) {
   const errors = validationResult(req);
+  console.log(errors.array());
   if (!errors.isEmpty()) {
-    const [weapons, weaponTypes, affinityTypes, itemTypes] = await Promise.all([
+    const [
+      weapons,
+      weaponTypes,
+      affinityTypes,
+      itemTypes,
+      spellTypes,
+      spellSchools,
+      potionTypes,
+    ] = await Promise.all([
       db.getAllWeapons(),
       db.getWeaponTypes(),
       db.getAffinityTypes(),
       db.getItemTypes(),
+      db.getSpellTypes(),
+      db.getSpellSchools(),
+      db.getPotionTypes(),
     ]);
-
     return res.status(400).render("weapons/weapons", {
       title: "Weapons of High Wreath Wares",
       weapons,
       weaponTypes,
       affinityTypes,
       itemTypes,
+      spellTypes,
+      spellSchools,
+      potionTypes,
       errors: errors.array(),
     });
   }
@@ -340,11 +357,22 @@ async function createWeaponPost(req, res) {
 async function createTomePost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const [tomes, spellTypes, spellSchools, itemTypes] = await Promise.all([
+    const [
+      tomes,
+      spellTypes,
+      spellSchools,
+      itemTypes,
+      weaponTypes,
+      affinityTypes,
+      potionTypes,
+    ] = await Promise.all([
       db.getAllTomes(),
       db.getSpellTypes(),
       db.getSpellSchools(),
       db.getItemTypes(),
+      db.getWeaponTypes(),
+      db.getAffinityTypes(),
+      db.getPotionTypes(),
     ]);
     return res.status(400).render("tomes/tomes", {
       title: "Tomes of High Wreath Wares",
@@ -352,6 +380,9 @@ async function createTomePost(req, res) {
       spellTypes,
       spellSchools,
       itemTypes,
+      weaponTypes,
+      affinityTypes,
+      potionTypes,
       errors: errors.array(),
     });
   }
@@ -363,16 +394,32 @@ async function createTomePost(req, res) {
 async function createPotionPost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const [potions, potionTypes, itemTypes] = await Promise.all([
+    const [
+      potions,
+      potionTypes,
+      itemTypes,
+      weaponTypes,
+      affinityTypes,
+      spellTypes,
+      spellSchools,
+    ] = await Promise.all([
       db.getAllPotions(),
       db.getPotionTypes(),
       db.getItemTypes(),
+      db.getWeaponTypes(),
+      db.getAffinityTypes(),
+      db.getSpellTypes(),
+      db.getSpellSchools(),
     ]);
     return res.status(400).render("potions/potions", {
       title: "Potions of High Wreath Wares",
       potions,
       potionTypes,
       itemTypes,
+      weaponTypes,
+      affinityTypes,
+      spellTypes,
+      spellSchools,
       errors: errors.array(),
     });
   }

@@ -6,6 +6,7 @@
   <body>
     <%- include("../partials/navbar", {itemTypes, weaponTypes, affinityTypes, potionTypes}) %> <%-
     include("../partials/addTome", {spellTypes, spellSchools}) %>
+    <%- include("../partials/errors") %>
     <h1><%= title %></h1>
     <ul class="inventory-container">
       <% tomes.forEach((tome) => { %>
