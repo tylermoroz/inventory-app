@@ -50,8 +50,10 @@ async function getInventory(req, res) {
     itemTypes,
     weaponTypes,
     affinityTypes,
+    tomes,
     spellTypes,
     spellSchools,
+    potions,
     potionTypes,
   ] = await Promise.all([
     db.getAllInventory(),
@@ -59,8 +61,10 @@ async function getInventory(req, res) {
     db.getItemTypes(),
     db.getWeaponTypes(),
     db.getAffinityTypes(),
+    db.getAllTomes(),
     db.getSpellTypes(),
     db.getSpellSchools(),
+    db.getAllPotions(),
     db.getPotionTypes(),
   ]);
   res.render("inventory", {
@@ -70,8 +74,10 @@ async function getInventory(req, res) {
     itemTypes,
     weaponTypes,
     affinityTypes,
+    tomes,
     spellTypes,
     spellSchools,
+    potions,
     potionTypes,
   });
 }

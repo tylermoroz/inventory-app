@@ -10,9 +10,17 @@
     <h1><%= title %></h1>
     <ul class="inventory-container">
       <% potions.forEach((potion) => { %>
+        <%
+          const potionType = potionTypes.find(
+            (type) => type.id === potion.potion_type_id
+          ); 
+        %>
       <li class="inventory-item potion">
         <div class="item-name-container">
           <h2 class="item-name"><%= potion.name %></h2>
+        </div>
+        <div class="image-container">
+          <img src="/images/potions/<%= potionType.name.toLowerCase() %>_potion.png" alt="<%= potion.name %>, <%= potionType.name %> potion">
         </div>
         <div class="flex-div">
           <div class="item-info-container">

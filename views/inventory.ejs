@@ -14,8 +14,6 @@
         </div>
         <div class="image-container">
           <% if (item.item_type_id === 1){ %>
-            
-              
                 <%
                   const weapon = weapons.find(
                     weapon => weapon.shop_inventory_id === item.id
@@ -30,8 +28,34 @@
                   ); 
                 %>
                 <img src="/images/weapons/<%= affinityType.name.toLowerCase() %>_<%= weaponType.name.toLowerCase() %>.png" alt="<%= weapon.name %>, <%= affinityType.name %> <%= weaponType.name %>">
-              
-            
+          <% } else if (item.item_type_id === 2) { %>
+                <%
+                  const tome = tomes.find(
+                    tome => tome.shop_inventory_id === item.id
+                  );
+
+                  const spellType = spellTypes.find(
+                    type => type.id === tome.spell_type_id
+                  );
+
+                  const spellSchool = spellSchools.find(
+                    school => school.id === tome.spell_school_id
+                  );
+                %>
+                <img src="/images/tomes/<%= spellSchool.name.toLowerCase() %>_<%= spellType.name.toLowerCase() %>.png" alt="<%= tome.name %>, <%= spellSchool.name %> <%= spellType.name %>">
+          <% } else if (item.item_type_id === 3) { %> 
+            <%
+              const potion = potions.find(
+                potion => potion.shop_inventory_id === item.id
+              );
+
+              const potionType = potionTypes.find(
+                type => type.id === potion.potion_type_id
+              );
+            %>
+            <div class="image-container">
+              <img src="/images/potions/<%= potionType.name.toLowerCase() %>_potion.png" alt="<%= potion.name %>, <%= potionType.name %> potion">
+            </div>
           <% } %>
         </div>
         <div class="item-info-container">
