@@ -478,6 +478,11 @@ async function potionUpdateGet(req, res) {
 }
 
 async function weaponUpdatePost(req, res) {
+  const { adminPassword } = req.body;
+
+  if (adminPassword !== process.env.ADMIN_CODE) {
+    return res.status(403).send("Unauthorized");
+  }
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const [dbWeapon, weaponTypes, affinityTypes] = await Promise.all([
@@ -505,6 +510,11 @@ async function weaponUpdatePost(req, res) {
 }
 
 async function updateTomePost(req, res) {
+  const { adminPassword } = req.body;
+
+  if (adminPassword !== process.env.ADMIN_CODE) {
+    return res.status(403).send("Unauthorized");
+  }
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const [dbTome, spellTypes, spellSchools] = await Promise.all([
@@ -532,6 +542,11 @@ async function updateTomePost(req, res) {
 }
 
 async function updatePotionPost(req, res) {
+  const { adminPassword } = req.body;
+
+  if (adminPassword !== process.env.ADMIN_CODE) {
+    return res.status(403).send("Unauthorized");
+  }
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const [dbPotion, potionTypes] = await Promise.all([
@@ -557,6 +572,11 @@ async function updatePotionPost(req, res) {
 }
 
 async function deleteItemPost(req, res) {
+  const { adminPassword } = req.body;
+
+  if (adminPassword !== process.env.ADMIN_CODE) {
+    return res.status(403).send("Unauthorized");
+  }
   await db.deleteItem(req.params.id);
   res.redirect(req.get("Referer") || "/");
 }

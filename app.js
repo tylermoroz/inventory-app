@@ -11,6 +11,18 @@ const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.json());
+
+app.post("/api/verify-password", (req, res) => {
+  const { passwordAttempt } = req.body;
+
+  if (passwordAttempt === process.env.ADMIN_CODE) {
+    return res.json({ success: true });
+  }
+
+  return res.json({ success: false });
+});
+
 app.use("/", inventoryRouter);
 
 const PORT = process.env.PORT || 3000;

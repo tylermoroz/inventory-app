@@ -34,11 +34,8 @@
           </div>
           <div class="item-edit-container">
             <a href="/potions/<%= potion.shop_inventory_id %>/update">Update</a>
-            <form action="/<%= potion.shop_inventory_id %>/delete" method="POST">
-              <button
-                type="submit"
-                onclick="return confirm('Are you sure this potion no longer belongs?');"
-              >
+            <form action="/<%= potion.shop_inventory_id %>/delete" method="POST" class="delete-form">
+              <button type="submit">
                 Delete
               </button>
             </form>
@@ -48,5 +45,6 @@
       <% }) %>
     </ul>
     <script src="/scripts/sliders.js"></script>
+    <script src="/scripts/secureDelete.js"></script>
   </body>
 </html>

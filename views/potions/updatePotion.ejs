@@ -6,7 +6,7 @@
 <body>
     <h1><%= title %></h1>
     <%- include("../partials/errors") %>
-    <form action="/potions/<%= potion.id %>/update" method="POST">
+    <form action="/potions/<%= potion.id %>/update" method="POST" id="updateForm">
         <label for="name">Name: </label>
         <input type="text" name="name" id="name" value="<%= potion.name %>">
         <label for="potion_type_id">Potion Type: </label>
@@ -34,5 +34,6 @@
     </form>
     <a href="/potions">Back to Potions</a>
     <script src="/scripts/sliders.js"></script>
+    <script src="/scripts/secureUpdate.js"></script>
 </body>
 </html>

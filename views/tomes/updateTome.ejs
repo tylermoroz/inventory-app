@@ -6,7 +6,7 @@
 <body>
     <h1><%= title %></h1>
     <%- include("../partials/errors") %>
-    <form action="/tomes/<%= tome.id %>/update" method="POST">
+    <form action="/tomes/<%= tome.id %>/update" method="POST" id="updateForm">
         <label for="name">Name: </label>
         <input type="text" name="name" id="name" value="<%= tome.name %>">
         <label for="spell_type_id">Spell Type: </label>
@@ -43,5 +43,6 @@
     </form>
     <a href="/tomes">Back to Tomes</a>
     <script src="/scripts/sliders.js"></script>
+    <script src="/scripts/secureUpdate.js"></script>
 </body>
 </html>
