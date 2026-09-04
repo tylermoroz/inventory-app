@@ -109,6 +109,7 @@ async function getWeapons(req, res) {
     spellTypes,
     spellSchools,
     potionTypes,
+    returnTo: req.originalUrl,
   });
 }
 
@@ -139,6 +140,7 @@ async function getWeaponsByType(req, res) {
     spellTypes,
     spellSchools,
     potionTypes,
+    returnTo: req.originalUrl,
   });
 }
 
@@ -169,6 +171,7 @@ async function getWeaponsByAffinity(req, res) {
     spellTypes,
     spellSchools,
     potionTypes,
+    returnTo: req.originalUrl,
   });
 }
 
@@ -199,6 +202,7 @@ async function getTomes(req, res) {
     weaponTypes,
     affinityTypes,
     potionTypes,
+    returnTo: req.originalUrl,
   });
 }
 
@@ -229,6 +233,7 @@ async function getTomesBySpellType(req, res) {
     weaponTypes,
     affinityTypes,
     potionTypes,
+    returnTo: req.originalUrl,
   });
 }
 
@@ -259,6 +264,7 @@ async function getTomesBySpellSchool(req, res) {
     weaponTypes,
     affinityTypes,
     potionTypes,
+    returnTo: req.originalUrl,
   });
 }
 
@@ -289,6 +295,7 @@ async function getPotions(req, res) {
     affinityTypes,
     spellTypes,
     spellSchools,
+    returnTo: req.originalUrl,
   });
 }
 
@@ -319,6 +326,7 @@ async function getPotionsByType(req, res) {
     affinityTypes,
     spellTypes,
     spellSchools,
+    returnTo: req.originalUrl,
   });
 }
 
@@ -352,12 +360,14 @@ async function createWeaponPost(req, res) {
       spellTypes,
       spellSchools,
       potionTypes,
+      returnTo: req.originalUrl,
       errors: errors.array(),
     });
   }
   const data = matchedData(req);
+  const returnTo = req.body.returnTo;
   await db.insertWeapon(data);
-  return res.redirect("/weapons");
+  return res.redirect(returnTo);
 }
 
 async function createTomePost(req, res) {
@@ -389,12 +399,14 @@ async function createTomePost(req, res) {
       weaponTypes,
       affinityTypes,
       potionTypes,
+      returnTo: req.originalUrl,
       errors: errors.array(),
     });
   }
   const data = matchedData(req);
+  const returnTo = req.body.returnTo;
   await db.insertTome(data);
-  return res.redirect("/tomes");
+  return res.redirect(returnTo);
 }
 
 async function createPotionPost(req, res) {
@@ -426,12 +438,14 @@ async function createPotionPost(req, res) {
       affinityTypes,
       spellTypes,
       spellSchools,
+      returnTo: req.originalUrl,
       errors: errors.array(),
     });
   }
   const data = matchedData(req);
+  const returnTo = req.body.returnTo;
   await db.insertPotion(data);
-  return res.redirect("/potions");
+  return res.redirect(returnTo);
 }
 
 async function weaponUpdateGet(req, res) {

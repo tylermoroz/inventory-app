@@ -1,7 +1,9 @@
 const pool = require("./pool");
 
 async function getAllInventory() {
-  const { rows } = await pool.query(`SELECT * FROM shop_inventory`);
+  const { rows } = await pool.query(
+    `SELECT * FROM shop_inventory ORDER BY id ASC`
+  );
   return rows;
 }
 
@@ -16,6 +18,7 @@ async function getAllWeapons() {
      FROM weapons
      JOIN shop_inventory 
       ON weapons.shop_inventory_id = shop_inventory.id
+     ORDER BY weapons.shop_inventory_id ASC
     `
   );
   return rows;
@@ -32,6 +35,7 @@ async function getAllTomes() {
      FROM tomes
      JOIN shop_inventory
       ON tomes.shop_inventory_id = shop_inventory.id
+     ORDER BY tomes.shop_inventory_id ASC
     `
   );
   return rows;
@@ -48,6 +52,7 @@ async function getAllPotions() {
      FROM potions
      JOIN shop_inventory
       ON potions.shop_inventory_id = shop_inventory.id
+     ORDER BY potions.shop_inventory_id ASC
     `
   );
   return rows;
@@ -66,7 +71,8 @@ async function getWeaponsByType(weaponTypeName) {
       ON weapons.shop_inventory_id = shop_inventory.id
      JOIN weapon_type
       ON weapons.weapon_type_id = weapon_type.id
-     WHERE weapon_type.name = $1`,
+     WHERE weapon_type.name = $1
+     ORDER BY weapons.shop_inventory_id ASC`,
     [weaponTypeName]
   );
   return rows;
@@ -85,7 +91,8 @@ async function getWeaponsByAffinity(weaponAffinityName) {
       ON weapons.shop_inventory_id = shop_inventory.id
      JOIN affinity_type
       ON weapons.affinity_type_id = affinity_type.id
-     WHERE affinity_type.name = $1`,
+     WHERE affinity_type.name = $1
+     ORDER BY weapons.shop_inventory_id ASC`,
     [weaponAffinityName]
   );
   return rows;
@@ -104,7 +111,8 @@ async function getTomesBySpellType(spellTypeName) {
       ON tomes.shop_inventory_id = shop_inventory.id
      JOIN spell_type
       ON tomes.spell_type_id = spell_type.id
-     WHERE spell_type.name = $1`,
+     WHERE spell_type.name = $1
+     ORDER BY tomes.shop_inventory_id ASC`,
     [spellTypeName]
   );
   return rows;
@@ -123,7 +131,8 @@ async function getTomesBySpellSchool(spellSchoolName) {
       ON tomes.shop_inventory_id = shop_inventory.id
      JOIN spell_school
       ON tomes.spell_school_id = spell_school.id
-     WHERE spell_school.name = $1`,
+     WHERE spell_school.name = $1
+     ORDER BY tomes.shop_inventory_id ASC`,
     [spellSchoolName]
   );
   return rows;
@@ -142,7 +151,8 @@ async function getPotionsByType(potionTypeName) {
       ON potions.shop_inventory_id = shop_inventory.id
      JOIN potion_type
       ON potions.potion_type_id = potion_type.id
-     WHERE potion_type.name = $1`,
+     WHERE potion_type.name = $1
+     ORDER BY potions.shop_inventory_id ASC`,
     [potionTypeName]
   );
   return rows;

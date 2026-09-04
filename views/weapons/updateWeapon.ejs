@@ -2,59 +2,62 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <h1><%= title %></h1>
     <%- include("../partials/errors") %>
-    <form action="/weapons/<%= weapon.id %>/update" method="POST" id="updateForm">
-        <label for="name">Name: </label>
-        <input type="text" name="name" id="name" value="<%= weapon.name %>">
-        <label for="weapon_type_id">Weapon Type: </label>
-        <select name="weapon_type_id" id="weapon_type_id">
-            <% weaponTypes.forEach((type) => { %>
-            <option value="<%= type.id %>" <%= type.id === weapon.weapon_type_id ? "selected" : "" %>
-            >
-            <%= type.name %>
-            </option>
-            <% }) %>
-        </select>
-        <label for="affinity_type_id">Affinity: </label>
-        <select name="affinity_type_id" id="affinity_type_id">
-            <% affinityTypes.forEach((affinity) => { %>
-            <option value="<%= affinity.id %>" <%= affinity.id === weapon.affinity_type_id ? "selected" : "" %>
-            >
-            <%= affinity.name %>
-            </option>
-            <% }) %>
-        </select>
-        <div class="slider-container">
-          <label for="damage">Damage: </label>
-          <input class="stat-slider" type="range" name="damage" id="damage" min="1" max="1000" value="<%= weapon.damage %>" />
-          <span class="slider-value"><%= weapon.damage %></span>
-        </div>
-        <div class="slider-container">
-          <label for="durability">Durability: </label>
-          <input
-            class="stat-slider"
-            type="range"
-            name="durability"
-            id="durability"
-            min="1"
-            max="100"
-            value="<%= weapon.durability %>"
-          />
-          <span class="slider-value"><%= weapon.durability %></span>
-        </div>
-        <div class="slider-container">
-          <label class="stat-slider" for="weight">Weight: </label>
-          <input type="range" name="weight" id="weight" min="1" max="100" value="<%= weapon.weight %>" />
-          <span class="slider-value"><%= weapon.weight %></span>
-        </div>
-        <label for="value">Value: </label>
-        <input type="number" name="value" id="value" min="1" max="1000" value="<%= weapon.value %>" />
-      <button type="submit">Update Weapon</button>
-    </form>
-    <a href="/weapons">Back to Weapons</a>
+    <div class="form-container">
+        <form action="/weapons/<%= weapon.id %>/update" method="POST" id="updateForm">
+          <label for="name">Name: </label>
+          <input type="text" name="name" id="name" value="<%= weapon.name %>">
+          <label for="weapon_type_id">Weapon Type: </label>
+          <select name="weapon_type_id" id="weapon_type_id">
+              <% weaponTypes.forEach((type) => { %>
+              <option value="<%= type.id %>" <%= type.id === weapon.weapon_type_id ? "selected" : "" %>
+              >
+              <%= type.name %>
+              </option>
+              <% }) %>
+          </select>
+          <label for="affinity_type_id">Affinity: </label>
+          <select name="affinity_type_id" id="affinity_type_id">
+              <% affinityTypes.forEach((affinity) => { %>
+              <option value="<%= affinity.id %>" <%= affinity.id === weapon.affinity_type_id ? "selected" : "" %>
+              >
+              <%= affinity.name %>
+              </option>
+              <% }) %>
+          </select>
+          <div class="slider-container">
+            <label for="damage">Damage: </label>
+            <input class="stat-slider" type="range" name="damage" id="damage" min="1" max="1000" value="<%= weapon.damage %>" />
+            <span class="slider-value"><%= weapon.damage %></span>
+          </div>
+          <div class="slider-container">
+            <label for="durability">Durability: </label>
+            <input
+              class="stat-slider"
+              type="range"
+              name="durability"
+              id="durability"
+              min="1"
+              max="100"
+              value="<%= weapon.durability %>"
+            />
+            <span class="slider-value"><%= weapon.durability %></span>
+          </div>
+          <div class="slider-container">
+            <label for="weight">Weight: </label>
+            <input class="stat-slider" type="range" name="weight" id="weight" min="1" max="100" value="<%= weapon.weight %>" />
+            <span class="slider-value"><%= weapon.weight %></span>
+          </div>
+          <label for="value">Value: </label>
+          <input type="number" name="value" id="value" min="1" max="1000" value="<%= weapon.value %>" />
+        <button type="submit">Update Weapon</button>
+      </form>
+      <a href="/weapons">Back to Weapons</a>
+    </div>
     <script src="/scripts/sliders.js"></script>
     <script src="/scripts/secureUpdate.js"></script>
   </body>
