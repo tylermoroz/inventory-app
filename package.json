@@ -12,7 +12,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "populate": "node populatedb.js"
   },
   "keywords": [],
   "author": "",
