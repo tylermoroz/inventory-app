@@ -2,20 +2,28 @@
   <h2>Add Tome</h2>
   <form action="/tomes" method="POST">
     <input type="hidden" name="returnTo" value="<%= returnTo %>">
-    <label for="name">Name: </label>
-    <input type="text" name="name" id="name" required />
-    <label for="spell_type_id">Spell Type: </label>
-    <select name="spell_type_id" id="spell_type_id">
-      <% spellTypes.forEach(spell => { %>
-      <option value="<%= spell.id %>"><%= spell.name %></option>
-      <% }) %>
-    </select>
-    <label for="spell_school_id">Spell School: </label>
-    <select name="spell_school_id" id="spell_school_id">
-      <% spellSchools.forEach(school => { %>
-      <option value="<%= school.id %>"><%= school.name %></option>
-      <% }) %>
-    </select>
+    <div class="parent-input-container">
+      <div class="name-input-container">
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name" required />
+      </div>
+      <div class="spell-type-input-container">
+        <label for="spell_type_id">Spell Type: </label>
+        <select name="spell_type_id" id="spell_type_id">
+          <% spellTypes.forEach(spell => { %>
+          <option value="<%= spell.id %>"><%= spell.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="spell-school-input-container">
+        <label for="spell_school_id">Spell School: </label>
+        <select name="spell_school_id" id="spell_school_id">
+          <% spellSchools.forEach(school => { %>
+          <option value="<%= school.id %>"><%= school.name %></option>
+          <% }) %>
+        </select>
+      </div>
+    </div>
     <div class="slider-container">
       <label for="mana_cost">Mana Cost: </label>
       <input
@@ -34,8 +42,12 @@
       <input class="stat-slider" type="range" name="weight" id="weight" min="1" max="100" value="1" />
       <span class="slider-value">1</span>
     </div>
-    <label for="value">Value: </label>
-    <input type="number" name="value" id="value" min="1" max="1000" value="1" />
-    <button type="submit">Submit</button>
+    <div class="value-input-container">
+      <label for="value">Value: </label>
+      <input type="number" name="value" id="value" min="1" max="1000" value="1" />
+    </div>
+    <div class="submit-button-container">
+      <button type="submit">Submit</button>
+    </div>
   </form>
 </div>

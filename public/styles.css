@@ -20,6 +20,7 @@ h1 {
 nav {
   padding: 1em;
   padding-right: 5.5em;
+  margin-top: 1em;
 }
 
 .nav-list {
@@ -40,16 +41,19 @@ nav {
 }
 
 .nav-item .dropdown {
-  display: none;
   position: absolute;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .nav-item:hover .dropdown {
-  display: block;
   background-color: rgba(255, 211, 153, 0.849);
   border: 1px solid grey;
   border-radius: 5px;
   white-space: nowrap;
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .dropdown-item {
@@ -58,7 +62,13 @@ nav {
 }
 
 .submenu {
-  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: max-height 0.2s ease, transform 0.2s ease, opacity 0.2s ease,
+    visibility 0.2s;
 }
 
 .submenu-item {
@@ -66,12 +76,29 @@ nav {
 }
 
 .dropdown-item:hover > .submenu {
-  display: block;
+  max-height: 500px;
   margin-left: -1em;
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
 }
 
 .form-container {
-  padding-left: 3.5em;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  margin-bottom: 1em;
+}
+
+.form-container form .parent-input-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
 }
 
 .content-container {
@@ -147,4 +174,10 @@ nav {
   background-color: rgb(180, 214, 148);
   border-radius: 5px;
   box-shadow: inset 0 0 8px 5px rgb(86, 148, 28);
+}
+
+.update-item-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 3em;
 }

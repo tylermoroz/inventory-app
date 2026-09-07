@@ -4,10 +4,10 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <%- include("../partials/navbar", {itemTypes, spellTypes, spellSchools, potionTypes}) %> <%-
-    include("../partials/addWeapon", {weaponTypes, affinityTypes}) %>
+    <%- include("../partials/navbar", {itemTypes, spellTypes, spellSchools, potionTypes}) %>
     <%- include("../partials/errors") %>
     <div class="content-container">
+      <%- include("../partials/addWeapon", {weaponTypes, affinityTypes}) %>
       <h1><%= title %></h1>
       <ul class="inventory-container">
         <% weapons.forEach((weapon) => { %>
