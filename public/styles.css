@@ -15,7 +15,6 @@ body::after {
 
 h1 {
   font-size: 42px;
-  margin-left: 1.5em;
 }
 
 nav {
@@ -75,12 +74,18 @@ nav {
   padding-left: 3.5em;
 }
 
+.content-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 3em;
+}
+
 .inventory-container {
   display: flex;
   flex-direction: row;
   gap: 2em;
   flex-wrap: wrap;
-  margin: 2em;
+  padding: 0;
 }
 
 .inventory-item {
@@ -89,7 +94,7 @@ nav {
   justify-content: space-between;
   width: 12em;
   height: auto;
-  padding: 5px;
+  padding: 0.5em;
   text-align: center;
 }
 
@@ -113,7 +118,10 @@ nav {
 
 .item-edit-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  padding: 0.5em 0;
+  gap: 0.3em;
+  justify-content: center;
 }
 
 .item-edit-container form {

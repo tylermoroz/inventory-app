@@ -7,46 +7,48 @@
     <%- include("../partials/navbar", {itemTypes, weaponTypes, affinityTypes, potionTypes}) %> <%-
     include("../partials/addTome", {spellTypes, spellSchools}) %>
     <%- include("../partials/errors") %>
-    <h1><%= title %></h1>
-    <ul class="inventory-container">
-      <% tomes.forEach((tome) => { %>
-        <%
-          const spellType = spellTypes.find(
-            (type) => type.id === tome.spell_type_id
-          );
+    <div class="content-container">
+      <h1><%= title %></h1>
+      <ul class="inventory-container">
+        <% tomes.forEach((tome) => { %>
+          <%
+            const spellType = spellTypes.find(
+              (type) => type.id === tome.spell_type_id
+            );
 
-          const spellSchool = spellSchools.find(
-            (school) => school.id === tome.spell_school_id
-          ); 
-        %>
-      <li class="inventory-item tome">
-        <div class="item-name-container">
-          <h2 class="item-name"><%= tome.name %></h2>
-        </div>
-        <div class="image-container">
-          <img src="/images/tomes/<%= spellSchool.name.toLowerCase() %>_<%= spellType.name.toLowerCase() %>.png" alt="<%= tome.name %>, <%= spellSchool.name %> <%= spellType.name %>">
-        </div>
-        <div class="flex-div">
-          <div class="item-info-container">
-            <p class="item-id">id: <%= tome.shop_inventory_id %></p>
-            <p class="spell-type">Spell Type: <%= spellType.name %></p>
-            <p class="spell-school">Spell School: <%= spellSchool.name %></p>
-            <p class="mana_cost">Mana Cost: <%= tome.mana_cost %></p>
-            <p class="item-weight">Weight: <%= tome.weight %></p>
-            <p class="item-value">Value: <%= tome.value %></p>
+            const spellSchool = spellSchools.find(
+              (school) => school.id === tome.spell_school_id
+            ); 
+          %>
+        <li class="inventory-item tome">
+          <div class="item-name-container">
+            <h2 class="item-name"><%= tome.name %></h2>
           </div>
-          <div class="item-edit-container">
-            <a href="/tomes/<%= tome.shop_inventory_id %>/update">Update</a>
-            <form action="/<%= tome.shop_inventory_id %>/delete" method="POST" class="delete-form">
-              <button type="submit">
-                Delete
-              </button>
-            </form>
+          <div class="image-container">
+            <img src="/images/tomes/<%= spellSchool.name.toLowerCase() %>_<%= spellType.name.toLowerCase() %>.png" alt="<%= tome.name %>, <%= spellSchool.name %> <%= spellType.name %>">
           </div>
-        </div>
-      </li>
-      <% }) %>
-    </ul>
+          <div class="flex-div">
+            <div class="item-info-container">
+              <p class="item-id">id: <%= tome.shop_inventory_id %></p>
+              <p class="spell-type">Spell Type: <%= spellType.name %></p>
+              <p class="spell-school">Spell School: <%= spellSchool.name %></p>
+              <p class="mana_cost">Mana Cost: <%= tome.mana_cost %></p>
+              <p class="item-weight">Weight: <%= tome.weight %></p>
+              <p class="item-value">Value: <%= tome.value %></p>
+            </div>
+            <div class="item-edit-container">
+              <a href="/tomes/<%= tome.shop_inventory_id %>/update">Update</a>
+              <form action="/<%= tome.shop_inventory_id %>/delete" method="POST" class="delete-form">
+                <button type="submit">
+                  Delete
+                </button>
+              </form>
+            </div>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
     <script src="/scripts/sliders.js"></script>
     <script src="/scripts/secureDelete.js"></script>
   </body>
