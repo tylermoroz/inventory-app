@@ -13,7 +13,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "populate": "node populatedb.js"
+    "populate": "node db/populatedb.js"
   },
   "keywords": [],
   "author": "",
